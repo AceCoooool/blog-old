@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习基石课后作业2-1：对应题目1～题目15">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石作业2：part1">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习基石课后作业2-1：对应题目1～题目15">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/MLF2-1/output_2_1.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/MLF2-1/Q6.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/MLF2-1/Q8.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/MLF2-1/Q10.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/MLF2-1/Q11_1.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/MLF2-1/Q14.png">
+<meta property="og:updated_time" content="2018-01-28T20:03:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石作业2：part1">
+<meta name="twitter:description" content="机器学习基石课后作业2-1：对应题目1～题目15">
+<meta name="twitter:image" content="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/MLF2-1/output_2_1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/07/MLF&MLT/MLF2-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习基石作业2：part1 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/07/MLF&MLT/MLF2-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石作业2：part1
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-07 20:22:43" itemprop="dateCreated datePublished" datetime="2017-02-07T20:22:43+08:00">2017-02-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:03:10" itemprop="dateModified" datetime="2018-01-29T04:03:10+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习基石课后作业2-1：对应题目1～题目15<br><a id="more"></a></p>
+<h2 id="机器学习基石作业2"><a href="#机器学习基石作业2" class="headerlink" title="机器学习基石作业2"></a>机器学习基石作业2</h2><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>Q1~Q2：考虑目标中存在噪声的情况。<br>假设存在一个似然函数$h$能够近似一个确定的目标函数$f$，且输出错误（即$h(x)\neq f(x)$）的概率为$\mu$（注：$h$和$f$的输出均为${-1,+1}$，如果我们用这个$h$去近似一个含噪声的$f$（用$y$表示），如下所示：<br>$$<br>P(x,y)=P(x)P(y|x) \ P(y|x)=\begin{cases}\lambda, \ \ \ \ \ \ \ \ \ \  y=f(x)\1-\lambda, \ \ \ \ otherwise\end{cases}<br>$$<br>Q1：用$h$近似带噪声的目标$y$的错误率时多少？</p>
+<p>A1：$h$和$y$通过$f$联系在一起，因此错误的情况分为两种：①$h=f, \ f\neq y$，这种的概率$P1=(1-\mu)(1-\lambda)$ ② $h\neq f,\ f=y$，这种的概率$P2=\mu \lambda$，所以最终的错误率$P=(1-\mu)(1-\lambda)+\mu\lambda$</p>
+<p>Q2：当$\lambda$取何值时，似然函数$h$与$\mu$无关？</p>
+<p>A2：对Q1中的结果进行化简：$P=(2\lambda-1)\mu-\lambda+1$，因此当$\lambda=1/2$时，上式与$\mu$无关。从中也可以看出，如果噪声强大到使得$f$的结果被搞得乱七八糟的，那么似然函数取什么将“没那么重要”。因此，噪声的多少和强度在分析问题时是重要的。</p>
+<h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><p>Q3~Q5：根据一些数值情况，来加深对泛化误差的理解<br>主要涉及到的是VC Bound这条式子（具体的推导可见课件和教材）：<br>$$<br>\mathbb{P}<em>D[|E</em>{in}(g)-E_{out}(g)|\gt\epsilon]\le 4(2N)^{d_{vc}}exp(-\frac{1}{8}\epsilon^2N)<br>$$<br>上式中$m_H(2N)=(2N)^{d_{vc}}$，且常将$\delta=4(2N)^{d_{vc}}exp(-\frac{1}{8}\epsilon^2N)$<br>为了简单起见，直接令$m_H(N)=N^{d_{vc}}$，且假设$N\ge 2，d_{vc}\ge2$</p>
+<p>Q3：对于一个$d_{vc}=10$的似然函数集$H$，如果我们希望其泛化误差$\epsilon\le0.05$的概率大于$95\%$，则下述哪个数据量与该条件最接近？<br>a. 500,000    b. 480,000    c. 420,000    d. 440,000    d. 460,000</p>
+<p>A3：在计算时做一步处理，将$(2N)^{d_{vc}}exp(-\frac{1}{8}\epsilon^2N)=exp(d_{vc}\cdot log(2N)-\frac{1}{8}\epsilon^2N)$，再将不同数据代入即可，最后可以发现$N=460,000$是最接近的。</p>
+<p>Q4&amp;Q5：除了VC Bound之外，还有许多其他的Bounds准则，主要有以下5种：<br>a. Original VC bound：$\epsilon\le\sqrt{\frac{8}{N}ln\frac{4m_H(2N)}{\delta}}$<br>b. Rademacher Penalty Bound：$\epsilon\le\sqrt{\frac{2}{N}ln(2Nm_H(N))}+\sqrt{\frac{2}{N}ln\frac{1}{\delta}}+\frac{1}{N}$<br>c. Parrondo and Van den Broek：$\epsilon\le\sqrt{\frac{1}{N}(2\epsilon+ln\frac{6m_H(2N)}{\delta})}$<br>d. Devroye：$\epsilon\le\sqrt{\frac{1}{2N}(4\epsilon(1+\epsilon)+ln\frac{4m_H(N^2)}{\delta})}$<br>e. Variant VC bound：$\epsilon\le\sqrt{\frac{16}{N}ln\frac{2m_H(N)}{\sqrt\delta}}$<br>假设$d_{vc}=50,\ \delta=0.05$，则对于不同$N$(10,000和5)的情况下，各Bounds中哪个值最小？</p>
+<p>A4&amp;A5：可以通过程序来实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">n = np.arange(<span class="number">3</span>, <span class="number">10000</span>)</span><br><span class="line">f1 = np.sqrt(<span class="number">8</span>/n*(np.log(<span class="number">80</span>)+<span class="number">50</span>*np.log(<span class="number">2</span>*n)))</span><br><span class="line">print(<span class="string">'Original VC bound (10000) and (5): '</span>, f1[<span class="number">-1</span>], <span class="string">'\t'</span>, f1[<span class="number">2</span>])</span><br><span class="line">f2 = np.sqrt(<span class="number">2</span>/n*(np.log(<span class="number">2</span>*n)+<span class="number">50</span>*np.log(n)))+np.sqrt(<span class="number">2</span>/n*math.log(<span class="number">20</span>))+<span class="number">1</span>/n</span><br><span class="line">print(<span class="string">'Rademacher Penalty Bound (10000) and (5): '</span>, f2[<span class="number">-1</span>], <span class="string">'\t'</span>, f2[<span class="number">2</span>])</span><br><span class="line">f3 = <span class="number">1</span>/n+np.sqrt(<span class="number">1</span>/np.power(n, <span class="number">2</span>)+<span class="number">1</span>/n*(np.log(<span class="number">120</span>)+<span class="number">50</span>*np.log(<span class="number">2</span>*n)))</span><br><span class="line">print(<span class="string">'Parrondo and Van den Broek (10000) and (5): '</span>, f3[<span class="number">-1</span>], <span class="string">'\t'</span>, f3[<span class="number">2</span>])</span><br><span class="line">f4 = <span class="number">1</span>/(n<span class="number">-2</span>)+np.sqrt(<span class="number">1</span>/np.power(n<span class="number">-2</span>, <span class="number">2</span>)+<span class="number">1</span>/(<span class="number">2</span>*n<span class="number">-4</span>)*(np.log(<span class="number">80</span>)+<span class="number">100</span>*np.log(n)))</span><br><span class="line">print(<span class="string">'Devroye (10000) and (5): '</span>, f4[<span class="number">-1</span>], <span class="string">'\t'</span>, f4[<span class="number">2</span>])</span><br><span class="line">f5 = np.sqrt(<span class="number">16</span>/n*(np.log(<span class="number">2</span>/math.sqrt(<span class="number">0.05</span>))+<span class="number">50</span>*np.log(n)))</span><br><span class="line">print(<span class="string">'Variant VC bound (10000) and (5): '</span>, f5[<span class="number">-1</span>], <span class="string">'\t'</span>, f5[<span class="number">2</span>])</span><br><span class="line">plt.plot(n, f1, label=<span class="string">'Original VC bound'</span>)</span><br><span class="line">plt.plot(n, f2, label=<span class="string">'Rademacher Penalty Bound'</span>)</span><br><span class="line">plt.plot(n, f3, label=<span class="string">'Parrondo and Van den Broek'</span>)</span><br><span class="line">plt.plot(n, f4, label=<span class="string">'Devroye'</span>)</span><br><span class="line">plt.plot(n, f5, label=<span class="string">'Variant VC bound'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code>Original VC bound (10000) and (5):  0.632203362312      13.828161485
+Rademacher Penalty Bound (10000) and (5):  0.33132369478      7.04877656418
+Parrondo and Van den Broek (10000) and (5):  0.223708366246      5.10136198199
+Devroye (10000) and (5):  0.215237656725      5.59312554318
+Variant VC bound (10000) and (5):  0.860464345894      16.264111061
+</code></pre><p><img src="MLF2-1/output_2_1.png" alt="png"></p>
+<p>因此对于$N=10,000$的情况Devroye最小，对于$N=5$的情况parrondo最小</p>
+<h3 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h3><p>Q6~Q11：主要考察growth function和VC维的问题</p>
+<p>Q6&amp;Q7：求“positive-and-negative intervals on R”这种类型似然函数集：①在区间$[l, r]$之间为$+1$，其他地方为$-1$或者②在区间$[l, r]$之间为$-1$，其他为$+1$的growth function（$m_H(N)$）和VC维？</p>
+<p><img src="MLF2-1/Q6.png" alt="Q6&amp;Q7"></p>
+<p>A6&amp;A7：上述问题可以看成N个数据(如上图9个数据，1代表第一个数据)，则之间有N-1个空隙，扩展左边空隙变为N个空隙，则任选两个空隙$C_N^2$，则有$2C_N^2$种分法。但这样还少了全+1和全-1的情况，所以，总共应该有$N(N-1)+2=N^2-N+2$种，而VC维则直接从$N-1,2,3…$不断代入，直到其$\lt 2^N$停止。不难求得$d_{vc}=3$</p>
+<p>Q8：二维空间上，“甜甜圈”类型的似然函数集(如下图所示)，在甜甜圈内部为+1（$a^2\le x_1^2+x_2^2\leq b^2$），外部为-1，假设$0&lt;a&lt;b&lt;\inf$，求其growth function？</p>
+<p><img src="MLF2-1/Q8.png" alt="Q8"></p>
+<p>A8：可以将其转换为1维情况来看，对于r相等的所有数据点视为相同，则问题就转换为一维类似Q6中的情况(但条件变了)，似然函数集等价于$[l, r]$之间为+1，其他地方为-1。从而类似的分析可得growth function为$C_{N+1}^2+1$（分析时两边都扩展空隙，+1来自于全部数据标签为-1的情况）</p>
+<p>Q9：考虑“多项式判别表达式”函数集在一维空间$\mathbb{R}$上的VC维为多少？（似然函数集如下）<br>$$<br>\mathcal{H}={h_c|h_c(x)=sign(\sum_{i=0}^Dc_ix^i)}<br>$$<br>A9：本质上就等同于Lec7(9/26)上的d-D perceptrons，（可以令$x_i=x^i$，从而转化为高维空间上的感知机问题）由PPT上结果可知$d_{vc}=D+1$（这道题目可以反映出一个情况：n次方程最多有n个不重根，那么就可以将一维空间划分为n+1段，可以得到一个小结论，一维空间能被划分为K个子区域(每个区域均可+可-)，则对应的$d_{vc}=K$）</p>
+<p>Q10：考虑d维空间$\mathbb{R}^d$上“简单决策树”似然函数集的VC维。似然函数集如下所示：<br>$$<br>\mathcal{H}={h_{t,S}|h_{t,S}(x)=2[v\in S]-1,\ where\ v_i=[x_i\gt t_i],\ S:a\ collection\ of\ vectors\ in\ {0,1}^d,\ t\in \mathbb{R}^d}<br>$$<br>其中，通过d个阈值$t_i(i=1,…d)$，将数据$x$划分到集合S中的一个区域中去，从而$x$的标签可以根据其是否在某块区域确定。求该似然函数集的VC维？</p>
+<p><img src="MLF2-1/Q10.png" alt="Q10_d=2"></p>
+<p>A10：这个问题我们可以先从两个特例出发，①$d=1$时的情况，可以看成$S={0},{1},{0,1},{}$，从而根据$t$的移动可以等价为双向射线的情况($S={0,1}{}$可以视为另外两种的子情况)，则对应的$m(N)=2N$，$d_{vc}=2$。（也可直接根据Q9得到结果）②$d=2$时的情况，相当于通过两条线(一条与x轴平行，一条与y轴平行)将空间划分为四个区域，每个区域均可+可-（互相独立），且这两条直线可上下左右移动(相当于改变阈值$t_i$)，显然，对于$N=4$可以shatter，对于$N=5$可以划分为四大类：a. (4,5)一起，则共有$s1=2^4=16$  b. (3,5)一起，则共有$s2=2\times 2^2=8$(去除了(4,5)同号情况)  c. (1,5)一起，则共有$s3=4$  d. (2,5)一起，则共有$s4=2$。所以总共有$s=16+8+4+2=30\neq 2^5=32$，因此$N=5$不能被shatter（因为图中情况属于“最佳可分”情况，所以可以不检验其他情况）。从中也可以得出一个结论，如果某个点无法单独存在于子区域中，则不可能shatter。 ③$d=M$的情况，此时整个空间可以被划分为$2^M$个子区域，由上述分析易知，$N=2^M$可以被shatter，而$N=2^M+1$不能被shatter。<br>综上所属：该问的答案为$d_{vc}=2^d$</p>
+<p>Q11：考虑一维空间上“三角波”似然函数集的VC维。三角波似然函数集如下所示：<br>$$<br>\mathcal{H}={h_\alpha|h_\alpha(x)=sign(|(\alpha x)mod\ 4-2|-1),\ \alpha\in\mathbb{R}}<br>$$<br>其中$z\ mod\ 4\in[0,4)$代表取余数。</p>
+<p><img src="MLF2-1/Q11_1.png" alt="Q11"></p>
+<p>A11：通过简单的运算不难发现，该似然函数集相当于一个方波（如图所示），该方波有两个特点，关于y轴对称，周期可以随意缩放，这样就相当于将$\mathbb{R}$划分为无限段区域。由于周期可以为任意正实数，所以甚至可以近乎无限小。根据Q9的结论易知该情况$d_{VC}=\infty$。举个例子，如$N=3$时，缩小则3变为-1，放大则1变为-1，缩小到一定程度能够使得1,3变为-1，总之可以根据缩放达到任意我们希望的+1,-1组合。</p>
+<h3 id="问题4"><a href="#问题4" class="headerlink" title="问题4"></a>问题4</h3><p>Q12~Q15：主要对growth function$m_H(N)$和VC维性质和界限的考察（这些均指$\mathbb{Y}\in{+1,-1}$）</p>
+<p>首先，对于$d_{vc}=K$的情况，$m_H(N)\leq B(N,K-1)=\sum_{i=0}^{K}\begin{pmatrix} N\i \end{pmatrix}$</p>
+<p>Q12：以下哪项是$N\ge d_{vc}\ge 2$情况下$m_H(N)$的上界？<br>a. $2^{d_{vc}}$    b. $\sqrt{N^{d_{vc}}}$        c. $m_H(\lfloor N/2\rfloor)$     d. $min_{1\le i\leq N-1}2^im_H(N-i)$</p>
+<p>A12：增加一个数据，最多增加2倍可能（即+1,-1），从而可知$m_H(N)\leq 2m_H(N-1)\leq 2^im_H(N-i)$，所以d项为$m_H(N)$的上界。</p>
+<p>Q13：以下哪一种growth function$m_H(N)$是不可能出现的？<br>a. $N^2-N+2$        b. $2^{\lfloor\sqrt{N}\rfloor}$        c. $2^N$    d. N</p>
+<p>A13：b项显然不可能，当$N=2$和$N=3$时是相等的，但$N=4$时却不同了，显然这不可能。其中有个结论：growth function是单调递增的</p>
+<p>Q14：有一系列似然函数集$\mathcal{H}_1,\mathcal{H}_2,…,\mathcal{H}<em>K$，对应的VC维为$d</em>{vc}(\mathcal{H}<em>k)$，以下哪一个选项是这一系列似然函数集的交集$d</em>{vc}(\cap_{k=1}^K\mathcal{H}<em>k)$的紧上下界限？<br>a. $min{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K\leq d_{vc}(\cap_{k=1}^K\mathcal{H}<em>k)\leq max{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K$<br>b. $0\le d_{vc}(\cap_{k=1}^K\mathcal{H}<em>k)\leq\sum</em>{k=1}^Kd_{vc}(\mathcal{H}<em>k)$<br>c. $min{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K\leq d_{vc}(\cap_{k=1}^K\mathcal{H}<em>k)\leq \sum</em>{k=1}^Kd_{vc}(\mathcal{H_k})$<br>d. $0\le d_{vc}(\cap_{k=1}^K\mathcal{H}<em>k)\le min{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K$<br>e. $0\le d_{vc}(\cap_{k=1}^K\mathcal{H}<em>k)\le max{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K$</p>
+<p><img src="MLF2-1/Q14.png" alt="Q14"></p>
+<p>A14：当全部$\mathcal{H}_k$均没有交集的情况下，则为$\emptyset$，从而下界为0，当为上图这种情况时交集为$\mathcal{H}<em>0$，从而为$min{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K$，因此答案为d</p>
+<p>Q15：以下哪一个选项是这一系列似然函数集的并集$d_{vc}(\cup_{k=1}^K\mathcal{H}<em>k)$的紧上下界限？<br>a. $min{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K\leq d_{vc}(\cup_{k=1}^K\mathcal{H}<em>k)\leq \sum</em>{k=1}^Kd_{vc}(\mathcal{H}<em>k)$<br>b. $0\le d</em>{vc}(\cup_{k=1}^K\mathcal{H}<em>k)\leq\sum</em>{k=1}^Kd_{vc}(\mathcal{H}<em>k)$<br>c. $max{d</em>{vc}(\mathcal{H}<em>k)}</em>{k=1}^K\leq d_{vc}(\cup_{k=1}^K\mathcal{H}<em>k)\leq \sum</em>{k=1}^Kd_{vc}(\mathcal{H_k})$<br>d. $0\le d_{vc}(\cup_{k=1}^K\mathcal{H}<em>k)\le \sum</em>{k=1}^Kd_{vc}(\mathcal{H_k})+K-1$<br>e. $max{d_{vc}(\mathcal{H}<em>k)}</em>{k=1}^K\le d_{vc}(\cup_{k=1}^K\mathcal{H}<em>k)\le\sum</em>{k=1}^Kd_{vc}(\mathcal{H_k})+K-1$</p>
+<p>A15：显然并集包含最少似然函数的情况如上图所示，因此，下界为$max{d_{vc}(\mathcal{H}<em>k)}</em>{k=1}^K$，上界可以根据一个特例来说明：有一个$\mathcal{H}_1$，把平面所有点分为+1，$\mathcal{H}_2$把平面所有点分为-1。$\mathcal{H}_1$并$\mathcal{H}<em>2$的话为VC dimension为1，而各自$d</em>{vc}$加起来为0。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/06/MLF&MLT/MLF1-2/" rel="next" title="机器学习基石作业1：part2">
+                <i class="fa fa-chevron-left"></i> 机器学习基石作业1：part2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/08/MLF&MLT/MLF2-2/" rel="prev" title="机器学习基石作业2：part2">
+                机器学习基石作业2：part2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习基石作业2"><span class="nav-number">1.</span> <span class="nav-text">机器学习基石作业2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1"><span class="nav-number">1.1.</span> <span class="nav-text">问题1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2"><span class="nav-number">1.2.</span> <span class="nav-text">问题2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题3"><span class="nav-number">1.3.</span> <span class="nav-text">问题3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题4"><span class="nav-number">1.4.</span> <span class="nav-text">问题4</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

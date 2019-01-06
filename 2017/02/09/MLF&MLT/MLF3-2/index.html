@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习基石课后作业3-2：对应题目13～题目20">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石作业3：part2">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/09/MLF&MLT/MLF3-2/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习基石课后作业3-2：对应题目13～题目20">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-28T20:03:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石作业3：part2">
+<meta name="twitter:description" content="机器学习基石课后作业3-2：对应题目13～题目20">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/09/MLF&MLT/MLF3-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习基石作业3：part2 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/09/MLF&MLT/MLF3-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石作业3：part2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-09 21:56:45" itemprop="dateCreated datePublished" datetime="2017-02-09T21:56:45+08:00">2017-02-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:03:44" itemprop="dateModified" datetime="2018-01-29T04:03:44+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习基石课后作业3-2：对应题目13～题目20<br><a id="more"></a></p>
+<h2 id="机器学习基石作业3"><a href="#机器学习基石作业3" class="headerlink" title="机器学习基石作业3"></a>机器学习基石作业3</h2><h2 id="问题5"><a href="#问题5" class="headerlink" title="问题5"></a>问题5</h2><p>Q13~Q15：主要关于线性回归问题和特征转换。</p>
+<p>数据产生：数据集大小$N=1000$，且$\mathcal{X}=[-1,1]\times[-1,1]$，每个数据的$\mathbb{x}$均等概率的从$\mathcal{X}$中提取。而对应的$y$则根据$f(x_1,x_2)=sign(x_1^2+x_2^2-0.6)$来确定，且对数据集中的$10\%$的数据的$y$进行反转。</p>
+<p>先对线性回归算法进行简单的说明</p>
+<h3 id="算法说明"><a href="#算法说明" class="headerlink" title="算法说明"></a>算法说明</h3><p>函数集：$y=w^T\mathbb{x}$</p>
+<p>损失函数：$E_{in}(w)=\frac{1}{N}\sum_{n=1}^N(w^T\mathbb{x}_n-y_n)^2$</p>
+<p>梯度：$\nabla E_{in}(w)=\frac{2}{N}(X^TXw-X^T\mathbb{y})$</p>
+<p>“目的”：寻找$w$使得损失函数最小</p>
+<p>Linear Regression</p>
+<blockquote>
+<p>①获得数据$(\mathbb{x}_1,y_1),…,(\mathbb{x}_N,y_N)$<br>②采用闭式解公式求出最佳$w$：$w_{lin}=(X^TX)^{-1}X^T\mathbb{y}$<br>③返回$w_{lin}$</p>
+<p>如果还有预测过程，直接$\hat{y}=w_{lin}^Tx$</p>
+</blockquote>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theta = lin.pinv(X.T.dot(X)).dot(X.T).dot(Y)</span><br></pre></td></tr></table></figure>
+<h3 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h3><p>数据产生函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据生成函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateData</span><span class="params">(num)</span>:</span></span><br><span class="line">    axeX = np.random.uniform(<span class="number">-1</span>, <span class="number">1</span>, num)</span><br><span class="line">    axeY = np.random.uniform(<span class="number">-1</span>, <span class="number">1</span>, num)</span><br><span class="line">    Xtemp = np.c_[axeX, axeY]</span><br><span class="line">    X = np.c_[np.ones((num, <span class="number">1</span>)), Xtemp]</span><br><span class="line">    Ytemp = np.sign(np.power(axeX, <span class="number">2</span>)+np.power(axeY, <span class="number">2</span>)<span class="number">-0.6</span>)</span><br><span class="line">    Ytemp[Ytemp == <span class="number">0</span>] = <span class="number">-1</span></span><br><span class="line">    pos = np.random.permutation(num)</span><br><span class="line">    Ytemp[pos[<span class="number">0</span>: round(<span class="number">0.1</span>*num)]] *= <span class="number">-1</span></span><br><span class="line">    Y = Ytemp.reshape((num, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> X, Y</span><br></pre></td></tr></table></figure>
+<p>Q13：不进行特征转换，只采用特征$(1, x_1,x_2)$，利用Linear Regression获得最佳的$w_{lin}$。将其直接运用到分类问题上面（利用$sign(w^Tx)$），在利用$0/1$判据来衡量训练样本误差$E_{in}$。进行1000次实验，取误差的平均。</p>
+<p>A13：通过下面的代码来实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">totalerr = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    X, Y = generateData(<span class="number">1000</span>)</span><br><span class="line">    theta = lin.pinv(X.T.dot(X)).dot(X.T).dot(Y)</span><br><span class="line">    ypred = np.sign(X.dot(theta))</span><br><span class="line">    err = np.sum(ypred!=Y)/<span class="number">1000</span></span><br><span class="line">    totalerr += err</span><br><span class="line">print(<span class="string">'Ein: '</span>, totalerr/<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein:  0.503646
+</code></pre><p>通过上面结果可知，直接利用Linear Regression(利用square error)再运用到分类问题上结果很差！</p>
+<p>Q14~Q15：将数据的特征进行转换，转换为$(1,x_1,x_2,x_1x_2,x_1^2,x_2^2)$这6项，再利用Linear Regression获得最佳的$w_{lin}$，求该$w_{lin}$以及将其运用到测试集上的测试误差$E_{out}$（衡量方式与Q13相同）</p>
+<p>A14~A15：特征转换函数如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 特征转换函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(X)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    Xback = np.zeros((row, <span class="number">6</span>))</span><br><span class="line">    Xback[:, <span class="number">0</span>:col] = X</span><br><span class="line">    Xback[:, col] = X[:, <span class="number">1</span>]*X[:, <span class="number">2</span>]</span><br><span class="line">    Xback[:, col+<span class="number">1</span>] = X[:, <span class="number">1</span>]**<span class="number">2</span></span><br><span class="line">    Xback[:, col+<span class="number">2</span>] = X[:, <span class="number">2</span>]**<span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> Xback</span><br></pre></td></tr></table></figure>
+<p>问题的具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q14</span></span><br><span class="line">totalerr = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    X, Y = generateData(<span class="number">1000</span>)</span><br><span class="line">    Xtran = transform(X)</span><br><span class="line">    theta = lin.pinv(Xtran.T.dot(Xtran)).dot(Xtran.T).dot(Y)</span><br><span class="line">    Xtest, Ytest = generateData(<span class="number">1000</span>)</span><br><span class="line">    Xback = transform(Xtest)</span><br><span class="line">    ypred = np.sign(Xback.dot(theta))</span><br><span class="line">    err = np.sum(ypred!=Ytest)/<span class="number">1000</span></span><br><span class="line">    totalerr += err</span><br><span class="line">print(<span class="string">'theta: '</span>, theta.T)</span><br><span class="line">print(<span class="string">'Eout: '</span>, totalerr/<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>theta:  [[-1.01626639  0.07325707  0.02834912 -0.0155599   1.63387468  1.52477431]]
+Eout:  0.12608
+</code></pre><p>需要指出的是，Q14中给出的选项中最接近的为：<br>$$<br>g(x_1,x_2)=sign(-1-0.05x_1+0.08x_2+0.13x_1x_2+1.5x_1^2+1.5x_2^2)<br>$$</p>
+<h2 id="问题6"><a href="#问题6" class="headerlink" title="问题6"></a>问题6</h2><p>Q16~Q17：关于多类别logistics regression问题。针对K类别分类问题，我们定义输出空间$\mathcal{Y}={1,2,…,K}$，MLR的函数集可以视为由一系列(K个)权值向量$(w_1,…,w_K)$构成，其中每个权值向量均为$d+1$维。每种假设函数可以表示为：<br>$$<br>h_y(x)=\frac{exp(w^T_y\mathbb{x})}{\sum_{i=1}^Kexp(w_i^T\mathbb{x})}<br>$$<br>且可以用来近似潜在的目标分布函数$P(y|\mathbb{x})$。MLR的“目标”就是从假设函数集中寻找使得似然函数最大的额假设函数。</p>
+<p>Q16：类似Lec10中最小化$-log(likelihood)$一样，推导$E_{in}(w_1,…,w_K)$</p>
+<p>A16：采用同样的处理方式<br>$$<br>max\ \frac{1}{N}\prod_{i=1}^Nh_y(\mathbb{x})\to min\ -\frac{1}{N}\sum_{i=1}^Nlog(h_y(\mathbb{x}))<br>$$<br>将MLR的假设函数代入上式并化简可得：<br>$$<br>\frac{1}{N}\sum_{n=1}^N\big(ln(\sum_{i=1}^Kexp(w_i^T\mathbb{x}<em>n))-w^T</em>{y_n}\mathbb{x}<em>n\big)<br>$$<br>Q17：针对上述的$E</em>{in}$，它的一阶导数$\nabla E_{in}$可以表示为$\big(\frac{\partial E_{in}}{\partial w_1},\frac{\partial E_{in}}{\partial w_2,},…,\frac{\partial E_{in}}{\partial w_K}\big)$，求$\frac{\partial E_{in}}{\partial w_i}$。</p>
+<p>A17：直接对A16的答案的式子进行求导，就可以得到下式：<br>$$<br>\frac{1}{N}\sum_{n=1}^N\big((h_i(\mathbb{x}_n)-[y_n=i]\mathbb{x}_n\big)<br>$$</p>
+<h2 id="问题7"><a href="#问题7" class="headerlink" title="问题7"></a>问题7</h2><p>Q18~Q20：关于logistic regression实现的问题</p>
+<h3 id="算法说明-1"><a href="#算法说明-1" class="headerlink" title="算法说明"></a>算法说明</h3><p>函数集：$s=\sum_{i=0}^dw_ix_i$，$h(\mathbb{x})=\theta(s)=\frac{1}{1+e^{-s}}$</p>
+<p>损失函数：$E_{in}(w)=\frac{1}{N}\sum_{i=1}^Nln(1+exp(-y_nw^T\mathbb{x}_n))$</p>
+<p>梯度：$\nabla E_{in}=\frac{1}{N}\sum_{i=1}^N\theta\big(-y_nw^T\mathbb{x}_n\big)(-y_n\mathbb{x}_n)$</p>
+<p>“目的”：寻找一个最佳假设函数使得损失函数最小</p>
+<p>（注：$h(\mathbb{x})$来近似$P(y|\mathbb{x})$上述的损失函数通过cross-entropy可推导出来）</p>
+<p>Logistic Regression：</p>
+<blockquote>
+<p>初始化$w$<br>For t=0,1,…<br>​    ① 计算$\nabla E_{in}(w)$<br>​    ② 更新参数：$w\gets w-\eta\nabla E_{in}(w)$<br>返回$w$</p>
+</blockquote>
+<p>（上述$\eta$可以视为一个超参数，可以通过cross-validation来确定）</p>
+<h3 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sigmoid函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></span><br><span class="line">    zback = <span class="number">1</span>/(<span class="number">1</span>+np.exp(<span class="number">-1</span>*z))</span><br><span class="line">    <span class="keyword">return</span> zback</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Logistic Regression</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logisticReg</span><span class="params">(X, Y, eta, numiter, flag=<span class="number">0</span>)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    theta = np.zeros((col, <span class="number">1</span>))</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(numiter):</span><br><span class="line">        <span class="keyword">if</span> flag == <span class="number">0</span>:</span><br><span class="line">            derr = (<span class="number">-1</span>*X*Y).T.dot(sigmoid(<span class="number">-1</span>*X.dot(theta)*Y))/row</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> num &gt;= row:</span><br><span class="line">                num = <span class="number">0</span></span><br><span class="line">            derr = -Y[num, <span class="number">0</span>]*X[num: num+<span class="number">1</span>, :].T*sigmoid(<span class="number">-1</span>*X[num, :].dot(theta)[<span class="number">0</span>]*Y[num, <span class="number">0</span>])</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">        theta -= eta*derr</span><br><span class="line">    <span class="keyword">return</span> theta</span><br></pre></td></tr></table></figure>
+<h3 id="具体问题-1"><a href="#具体问题-1" class="headerlink" title="具体问题"></a>具体问题</h3><p>数据导入模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入数据函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadData</span><span class="params">(filename)</span>:</span></span><br><span class="line">    data = pd.read_csv(filename, sep=<span class="string">'\s+'</span>, header=<span class="keyword">None</span>)</span><br><span class="line">    data = data.as_matrix()</span><br><span class="line">    col, row = data.shape</span><br><span class="line">    X = np.c_[np.ones((col, <span class="number">1</span>)), data[:, <span class="number">0</span>: row<span class="number">-1</span>]]</span><br><span class="line">    Y = data[:, row<span class="number">-1</span>:row]</span><br><span class="line">    <span class="keyword">return</span> X, Y</span><br></pre></td></tr></table></figure>
+<p>错误率计算模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 误差计算函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mistake</span><span class="params">(X, Y, theta)</span>:</span></span><br><span class="line">    yhat = X.dot(theta)</span><br><span class="line">    yhat[yhat &gt; <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    yhat[yhat &lt;= <span class="number">0</span>] = <span class="number">-1</span></span><br><span class="line">    err = np.sum(yhat != Y)/len(Y)</span><br><span class="line">    <span class="keyword">return</span> err</span><br></pre></td></tr></table></figure>
+<p>Q18：针对$\eta=0.001,\ T=2000$的情况，采用梯度下降法获得$w$后，在测试集上的错误率是多少？（利用0/1判据）</p>
+<p>A18：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q18</span></span><br><span class="line">eta = <span class="number">0.001</span>; T = <span class="number">2000</span>; flag = <span class="number">0</span></span><br><span class="line">theta = logisticReg(X, Y, eta, T, flag)</span><br><span class="line">errin = mistake(X, Y, theta)</span><br><span class="line">errout = mistake(Xtest, Ytest, theta)</span><br><span class="line">print(<span class="string">'Ein = '</span>, errin,<span class="string">'Eout = '</span>, errout)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein =  0.466 Eout =  0.475
+</code></pre><p>Q19：针对$\eta=0.01,\ T=2000$的情况，采用梯度下降法获得$w$后，在测试集上的错误率是多少？（利用0/1判据）</p>
+<p>A19：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q19</span></span><br><span class="line">eta = <span class="number">0.01</span>; T = <span class="number">2000</span>; flag = <span class="number">0</span></span><br><span class="line">theta = logisticReg(X, Y, eta, T, flag)</span><br><span class="line">errin = mistake(X, Y, theta)</span><br><span class="line">errout = mistake(Xtest, Ytest, theta)</span><br><span class="line">print(<span class="string">'Ein = '</span>, errin,<span class="string">'Eout = '</span>, errout)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein =  0.197 Eout =  0.22
+</code></pre><p>Q20：针对$\eta=0.001,\ T=2000$的情况，采用随机梯度下降法(此处采用按顺序每次选择元素，更通常的做法是随机选择元素)获得$w$后，在测试集上的错误率是多少？（利用0/1判据）</p>
+<p>A20：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q20</span></span><br><span class="line">eta = <span class="number">0.001</span>; T = <span class="number">2000</span>; flag = <span class="number">1</span></span><br><span class="line">theta = logisticReg(X, Y, eta, T, flag)</span><br><span class="line">errin = mistake(X, Y, theta)</span><br><span class="line">errout = mistake(Xtest, Ytest, theta)</span><br><span class="line">print(<span class="string">'Ein = '</span>, errin,<span class="string">'Eout = '</span>, errout)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein =  0.464 Eout =  0.473
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/09/MLF&MLT/MLF3-1/" rel="next" title="机器学习基石作业3：part1">
+                <i class="fa fa-chevron-left"></i> 机器学习基石作业3：part1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/10/MLF&MLT/MLF4-1/" rel="prev" title="机器学习基石作业4：part1">
+                机器学习基石作业4：part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习基石作业3"><span class="nav-number">1.</span> <span class="nav-text">机器学习基石作业3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题5"><span class="nav-number">2.</span> <span class="nav-text">问题5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法说明"><span class="nav-number">2.1.</span> <span class="nav-text">算法说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现"><span class="nav-number">2.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体问题"><span class="nav-number">2.3.</span> <span class="nav-text">具体问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题6"><span class="nav-number">3.</span> <span class="nav-text">问题6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题7"><span class="nav-number">4.</span> <span class="nav-text">问题7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法说明-1"><span class="nav-number">4.1.</span> <span class="nav-text">算法说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现-1"><span class="nav-number">4.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体问题-1"><span class="nav-number">4.3.</span> <span class="nav-text">具体问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

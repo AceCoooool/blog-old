@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习基石Lec5-Lec8主要知识点：对应作业2">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石Lec5-Lec8">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习基石Lec5-Lec8主要知识点：对应作业2">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic1.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic2.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic3.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic4.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic5.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic6.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic7.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic8.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic9.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic10.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic11.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic12.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic13.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic14.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic15.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic16.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic17.png">
+<meta property="og:updated_time" content="2018-01-28T20:02:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石Lec5-Lec8">
+<meta name="twitter:description" content="机器学习基石Lec5-Lec8主要知识点：对应作业2">
+<meta name="twitter:image" content="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/MLF2/pic1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/11/MLF&MLT/MLF2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习基石Lec5-Lec8 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/11/MLF&MLT/MLF2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石Lec5-Lec8
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-11 19:27:15" itemprop="dateCreated datePublished" datetime="2017-02-11T19:27:15+08:00">2017-02-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:02:54" itemprop="dateModified" datetime="2018-01-29T04:02:54+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习基石Lec5-Lec8主要知识点：对应作业2<br><a id="more"></a></p>
+<h2 id="训练vs测试"><a href="#训练vs测试" class="headerlink" title="训练vs测试"></a>训练vs测试</h2><h3 id="假设函数集数量的影响"><a href="#假设函数集数量的影响" class="headerlink" title="假设函数集数量的影响"></a>假设函数集数量的影响</h3><p>机器学习能否可行的两个问题和假设函数集中假设函数的数量$M$的关系：</p>
+<p><img src="MLF2/pic1.png" alt=""></p>
+<h3 id="有效假设函数"><a href="#有效假设函数" class="headerlink" title="有效假设函数"></a>有效假设函数</h3><p>假设函数集中往往存在很多“冗余”(类似)假设函数，可以将相近的假设函数归为一类，当做一个假设函数，从而有效减少假设函数集中假设函数数量。</p>
+<ul>
+<li>$\mathcal{H}(x_1,x_2,…,x_N)$：针对数据集$x_1,x_2,…,x_N$，$\mathcal{H}$中存在的有效假设函数集。用$|\mathcal{H}|$表示该有效假设函数集中假设函数数量</li>
+<li>增长函数$m_{\mathcal{H}}(N)$定义：$m_{\mathcal{H}}(N)=max_{x_1,x_2,…,x_N\in \mathcal{X}}|\mathcal{H}(x_1,x_2,…,x_N)|$</li>
+<li>shatter的定义(此处只针对二元分类问题)：如果$m_{\mathcal{H}}(N)=2^N$，则称这N个输入能够被shatter</li>
+<li>断点的定义：如果k个输入不能被假设函数集shatter，则称k为断点</li>
+</ul>
+<p>从而可以将假设函数集对应的Hoeffding不等式表示为：</p>
+<p><img src="MLF2/pic2.png" alt=""></p>
+<p>如果我们能够获得$m_{\mathcal{H}}(N)=poly(N)$则当$N$足够大时能够有效</p>
+<h2 id="泛化理论"><a href="#泛化理论" class="headerlink" title="泛化理论"></a>泛化理论</h2><h3 id="断点带来的约束"><a href="#断点带来的约束" class="headerlink" title="断点带来的约束"></a>断点带来的约束</h3><p>边界函数$B(N,k)$的定义：当断点为$k$时，对应的$m_{\mathcal{H}}(N)$的最大可能数目</p>
+<p>由于存在断点，使得$m_{\mathcal{H}}(N)$随着$N$增大时，并不会急速增大：</p>
+<p><img src="MLF2/pic3.png" alt=""></p>
+<h3 id="边界函数推导"><a href="#边界函数推导" class="headerlink" title="边界函数推导"></a>边界函数推导</h3><p>对于边界函数$B(N,k)$，其任意$k$个数据均不能被shatter，因此显然$k$也是任意$N-1$个数据的断点，所以其$m(N-1)$最多有$B(N-1,k)$种假设函数(此处假设函数理解为${\times,\circ,…,\circ}^2$中的一种)，而这些假设函数又可以分为两大块：① 构成一块满足$B(N-1,k-1)$情况的假设函数集合 ②剩余部分的假设函数集合，即$B(N, k-1)-B(N-1,k-1)$。再增加一个数据从$N-1\to N$，则两大块情况不同：①中加入数据为$\times, \circ$皆可，因为本身断点为$k-1$，增加后最多断点变为$k$，②中则最多只能增加固定的一种可能(<strong><em>具体证明还没想出来</em></strong>) 。从而可以知道：<br>$$<br>B(N,k)=2\cdot B(N-1,k-1)+B(N-1,k)-B(N-1,k-1)\<br>=B(N-1,k-1)+B(N-1,k)=\sum_{i=0}^{k-1}\begin{pmatrix} N\i \end{pmatrix}<br>$$<br>证明：利用数学归纳法</p>
+<blockquote>
+<p>① 当$N=1$时，$B(N,k)=\begin{pmatrix}1\0\end{pmatrix}=1$<br>② 假设$B(N,k)=\sum_{i=0}^{k-1}\begin{pmatrix} N\i \end{pmatrix}$<br>③ 根据</p>
+<p>$$<br>B(N+1,k)=B(N,k)+B(N,k-1)=\sum_{i=0}^{k-1}\begin{pmatrix} N\i \end{pmatrix}+\sum_{i=0}^{k-2}\begin{pmatrix} N\i \end{pmatrix}=\sum_{i=0}^{k-1}\begin{pmatrix} N\i \end{pmatrix}+\sum_{i=1}^{k-2}\begin{pmatrix} N\i-1 \end{pmatrix}\<br>=1+\sum_{i=1}^{k-1}(\begin{pmatrix} N\i-1 \end{pmatrix}+\begin{pmatrix} N\i \end{pmatrix})=1+\sum_{i=1}^{k-1}\begin{pmatrix} N+1\i \end{pmatrix}=\sum_{i=0}^{k-1}\begin{pmatrix} N+1\i \end{pmatrix}<br>$$<br>从而的证</p>
+</blockquote>
+<h3 id="VC-bound"><a href="#VC-bound" class="headerlink" title="VC bound"></a>VC bound</h3><p>首先直接给出最终结论：</p>
+<p><img src="MLF2/pic4.png" alt=""></p>
+<p>主要分以下三个步骤进行证明（具体参照LFD这本书，不感兴趣可以忽略不看）</p>
+<hr>
+<p><strong>步骤①</strong> 用$E_{in}^\prime$替代$E_{out}$</p>
+<p>因为之前的$m(N)$均是建立在$N$的基础上进行分析的，因此无法直接运用于$E_{out}$，所以考虑用一个由虚拟的数据集$D^\prime$对应的$E_{in}^\prime$来取代$E_{out}$，替换的结果为：</p>
+<p><img src="MLF2/pic5.png" alt=""></p>
+<p>直观性解释：<br><img src="MLF2/pic6.png" alt=""></p>
+<p>红色区域为$|E_{in}-E_{out}|\ large$的区域，绿色区域为$|E_{in}^\prime-E_{in}|\ large$的区域，而$E_{in}^\prime$取到绿色的区域$\approx1/2$，从而可以知道$P[|E_{in}-E_{out}|\ large]\approx2P[|E_{in}^\prime-E_{in}|\ large]$</p>
+<p>证明：大前提—假设$P[sup_{h\in\mathcal{H}}|E_{in}(h)-E_{out}(h)|\gt\epsilon]\gt0$<br>① 其中(A.1)运用了$A\ and\ B\subset A\to P(A)\ge P(A\ and\ B)$<br><img src="MLF2/pic7.png" alt=""></p>
+<p>② 主要来考虑上式中的后一项，固定数据集$D$，令$h^<em>$表示任意一个使得$|E_{in}(h^</em>)-E_{out}(h^<em>)|\gt \epsilon$成立的假设函数，因为$E_{in}$是关于$D$的，而$E_{in}^\prime$是关于$D^\prime$的，所以$h^</em>$与$D$有关而与$D^\prime$无关。<br><img src="MLF2/pic8.png" alt=""></p>
+<p>A.2：当$|E_{in}(h^\star)-E_{in}^\prime(h^\star)|\gt \epsilon/2$成立时，显然有$sup_{h\in\mathcal{H}}|E_{in}(h^\star)-E_{in}^\prime(h^\star)|\gt \epsilon/2$<br>A.3：由$|E_{in}(h^\star)-E_{out}(h^\star)|\gt \epsilon​$和$|E_{in}^\prime(h^\star)-E_{out}(h^\star)|\le \epsilon/2​$两个不等式可以导出$|E_{in}(h^\star)-E_{in}^\prime(h^\star)|\gt \epsilon/2​$（即如果A.3成立，则A.2必然成立），背后的公式即：$|A|\gt a,\ |B|\le a/2\to |A-B|\ge|B|-|A|\gt a/2​$<br>A.4：由于$h^*$是某个固定$D$情况下满足条件的假设函数，因此条件$sup_{h\in\mathcal{H}}|E_{in}(h)-E_{out}(h)|\gt\epsilon$满足条件的全部$h$对于$|E_{in}^\prime(h^\star)-E_{out}(h^\star)|\le \epsilon/2$均成立。所以等价于$\sum P[h_i]P[|E_{in}^\prime(h_i)-E_{out}(h_i)|\le \epsilon/2]$。这些$\sum P[h_i]=1$。因此可以直接使用Hoedffding不等式，其中采用了$P[A&lt;a]=1-P[A\ge a]$</p>
+<p>③ 假设$e^{(-1/2)\epsilon^2N}\lt 1/4$（这对于N较大时一般均满足），则有$1-2e^{(-1/2)\epsilon^2N}\gt 1/2$，所以将$1/2$代入①中便可证明替换结果成立。</p>
+<p><strong>步骤②</strong> 基于growth function对$\mathcal{H}$进行分类</p>
+<p>由步骤①可知，问题已转换为求：$P[sup_{h\in\mathcal{H}}|E_{in}(h)-E_{in}^\prime(h)|\gt \epsilon/2]$<br>所以$\mathcal{H}$则被限制在两个大小为$N$的数据集$D\ and\ D^\prime$中，不妨定义一个大小为$2N$的数据集$S$，从中随机取出$N$个数为$D$，剩余的则为$D^\prime$。</p>
+<p>经过这一步后的结果为：<br><img src="MLF2/pic9.png" alt=""></p>
+<p>证明：<br>① 加入$S$条件，$S$代表$D$和$D^\prime$的并(不删除重复)，则对应问题就可以由下式表示<br><img src="MLF2/pic10.png" alt=""><br>其中(1)到(2)中由于$P[S]\le 1$，从而利用概率的准则可知。</p>
+<p>② 由前面growth function性质可知：假设函数集可以划分为$M$类，且满足$M\leq m_{\mathcal{H}}(2N)$（因为此时数据为$2N$项），所以问题就可以转变为：<br><img src="MLF2/pic11.png" alt=""><br>将其代入下面可知：<br><img src="MLF2/pic12.png" alt=""><br>A.5：采用了并集的性质<br>A.6：进行了扩大，取为全部中的最大情况</p>
+<p>③ 结合①②不难知，开始给出的结论成立</p>
+<p><strong>步骤③</strong> 基于无替换情况的Hoeffding不等式<br><img src="MLF2/pic13.png" alt=""><br>证明：<br>① 首先给出一种特殊情况下的Hoeffding不等式：令数据集$A={a_1,…,a_{2N}}\ \ a_i\in[0,1]$，因此其均值为$\mu=\frac{1}{2N}\sum a_n$，从数据集$A$中不放回的取出$N$个数构成另一个数据集$D={z_1,…z_{N}}$，则根据Hoeffding不等式可以知道（即容器中弹珠总数为2N，取出样本为N的情况）：<br>$$<br>P\big[|\frac{1}{N}\sum_{n=1}^{N}z_n-\mu|\gt\epsilon \big]\le2e^{-2\epsilon^2N}<br>$$<br>② 由$2N$个数据组成的数据集$S$，令$h(x_n)\ne y_n:a_n=1;\ h(x_n)= y_n:a_n=0$ 。类似①中情况，从数据集$S$中取出$N$个构成$D$，剩余的构成$D^\prime$，则有以下情况：<br>$$<br>E_{in}(h)=\frac{1}{N}\sum_{a_n\in D}a_n\ \ \ \ \ \ E_{in}^\prime(h)=\frac{1}{N}\sum_{a_n\in D^\prime}a_n^\prime<br>$$<br>又因为$S=D\cup D^\prime$，$D\cap D^\prime=\emptyset$，所以有下式：<br>$$<br>\mu=\frac{1}{2N}\sum_{n=1}^{2N}a_n=\frac{E_{in}(h)+E_{in}^\prime(h)}{2}\to E_{in}(h)-\mu=\frac{E_{in}(h)-E_{in}^\prime(h)}{2}<br>$$<br>所以①中特殊情况Hoeffding不等式代入可知：<br>$$<br>P[|E_{in}(h)-E_{in}^\prime(h)|\gt \frac{\epsilon}{2}]=P[2|E_{in}(h)-\mu|\gt\frac{\epsilon}{2}]=P[|E_{in}(h)-\mu|\gt\frac{\epsilon}{4}]\leq2e^{-2(\epsilon/4)^2N}<br>$$</p>
+<p>结合步骤①②③，可以证明VC bound。</p>
+<hr>
+<h2 id="VC维"><a href="#VC维" class="headerlink" title="VC维"></a>VC维</h2><h3 id="VC维理解"><a href="#VC维理解" class="headerlink" title="VC维理解"></a>VC维理解</h3><ul>
+<li>VC维的定义：满足$m_{\mathcal{H}}(N)=2^N$的最大的$N$</li>
+<li>VC维取值准则：往往根据$d_{vc}=自由参数的数目$（比较通用的方式，但并不一定都适用）</li>
+</ul>
+<h3 id="VC-bound的再理解"><a href="#VC-bound的再理解" class="headerlink" title="VC bound的再理解"></a>VC bound的再理解</h3><p>① 模型复杂度惩罚<br><img src="MLF2/pic14.png" alt=""><br>② VC bound比实际要宽松<br>理论上$N=10,000d_{vc}$情况下，学习才会比较好。但实际使用中$N=10d_{vc}$就能学的比较好了。主要原因有以下几个方面：<br><img src="MLF2/pic15.png" alt=""></p>
+<h2 id="噪声和错误"><a href="#噪声和错误" class="headerlink" title="噪声和错误"></a>噪声和错误</h2><h3 id="噪声对VC-bound的影响"><a href="#噪声对VC-bound的影响" class="headerlink" title="噪声对VC bound的影响"></a>噪声对VC bound的影响</h3><p>VC bound依旧成立（都还是容器模型衍生出来）：<br><img src="MLF2/pic16.png" alt=""></p>
+<h3 id="错误衡量"><a href="#错误衡量" class="headerlink" title="错误衡量"></a>错误衡量</h3><p><img src="MLF2/pic17.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/11/MLF&MLT/MLF1/" rel="next" title="机器学习基石Lec1-Lec4">
+                <i class="fa fa-chevron-left"></i> 机器学习基石Lec1-Lec4
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/12/MLF&MLT/MLF3/" rel="prev" title="机器学习基石Lec9-Lec12">
+                机器学习基石Lec9-Lec12 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#训练vs测试"><span class="nav-number">1.</span> <span class="nav-text">训练vs测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#假设函数集数量的影响"><span class="nav-number">1.1.</span> <span class="nav-text">假设函数集数量的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有效假设函数"><span class="nav-number">1.2.</span> <span class="nav-text">有效假设函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛化理论"><span class="nav-number">2.</span> <span class="nav-text">泛化理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#断点带来的约束"><span class="nav-number">2.1.</span> <span class="nav-text">断点带来的约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边界函数推导"><span class="nav-number">2.2.</span> <span class="nav-text">边界函数推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VC-bound"><span class="nav-number">2.3.</span> <span class="nav-text">VC bound</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VC维"><span class="nav-number">3.</span> <span class="nav-text">VC维</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VC维理解"><span class="nav-number">3.1.</span> <span class="nav-text">VC维理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VC-bound的再理解"><span class="nav-number">3.2.</span> <span class="nav-text">VC bound的再理解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#噪声和错误"><span class="nav-number">4.</span> <span class="nav-text">噪声和错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#噪声对VC-bound的影响"><span class="nav-number">4.1.</span> <span class="nav-text">噪声对VC bound的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误衡量"><span class="nav-number">4.2.</span> <span class="nav-text">错误衡量</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

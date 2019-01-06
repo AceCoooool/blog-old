@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习技法课后作业4-1：对应题目1～题目10">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习技法作业4：part1">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/25/MLF&MLT/MLT4-1/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习技法课后作业4-1：对应题目1～题目10">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/25/MLF&MLT/MLT4-1/MLT4-1/pic1.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/25/MLF&MLT/MLT4-1/MLT4-1/pic2.png">
+<meta property="og:updated_time" content="2018-01-28T20:14:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习技法作业4：part1">
+<meta name="twitter:description" content="机器学习技法课后作业4-1：对应题目1～题目10">
+<meta name="twitter:image" content="https://acecoooool.github.io/blog/2017/02/25/MLF&MLT/MLT4-1/MLT4-1/pic1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/25/MLF&MLT/MLT4-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习技法作业4：part1 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/25/MLF&MLT/MLT4-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习技法作业4：part1
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-25 09:56:51" itemprop="dateCreated datePublished" datetime="2017-02-25T09:56:51+08:00">2017-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:14:16" itemprop="dateModified" datetime="2018-01-29T04:14:16+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习技法课后作业4-1：对应题目1～题目10<br><a id="more"></a></p>
+<h2 id="机器学习技法作业4"><a href="#机器学习技法作业4" class="headerlink" title="机器学习技法作业4"></a>机器学习技法作业4</h2><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>Q1~Q3：关于神经网络和深度学习</p>
+<p>Q1：考虑一个完全连接的网络，包含三层，每层的神经元数目为$d^{(0)}=5,d^{(1)}=3,d^{(2)}=1$。如果仅仅认为以下三种形式的乘积$w_{ij}^{(l)}x_i^{(l-1)},w_{ij}^{(l+1)}\delta_j^{(l+1)},x_i^{(l-1)}\delta_j^{(l)}$算作一次运算（当然此处的$x$也包括$x_0=1$）。则进行一轮随机梯度下降法更新参数，需要进行多少次运算？</p>
+<p>A1：分为前向传播和反向传播：<br>前向传播：只涉及到$w_{ij}^{(l)}x_i^{(l-1)}$运算，总共进行了$n_1=(5+1)\times 3+(3+1)\times1=22$<br>反向传播：前面几层求$\delta_j^{(l)}$时涉及到$w_{ij}^{(l+1)}\delta_j^{(l+1)}$运算，且每一层对应该运算的次数为$l+1$层神经元数目。而每一个参数均需经历一次$x_i^{(l-1)}\delta_j^{(l)}$的运算，所以总的数目为$n_2=22+3\times 1=25$<br>所以，总的运算次数$n=n_1+n_2=47$</p>
+<p>Q2~Q3：考虑一个没有“误差项”$x_0^{(l)}$的神经网络。且假设输入层元素为$d^{(0)}=10$，隐藏层包含36个神经元(但隐藏层有多少层不一定)，输出层包含一个神经元，且神经网络为全连接网络，求所有可能的网络中，参数$w$数目最少和最多分别为多少？</p>
+<p>A2~A3：寻找所有可能的组合情况，可以参考<a href="http://stackoverflow.com/questions/4632322/finding-all-possible-combinations-of-numbers-to-reach-a-given-sum" target="_blank" rel="noopener">数字之和问题</a>，具体的实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># q2-q3</span></span><br><span class="line">hidden = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">subset_sum</span><span class="params">(numbers, target, partial=[])</span>:</span></span><br><span class="line">    s = sum(partial)</span><br><span class="line">    <span class="comment"># check if the partial sum is equals to target</span></span><br><span class="line">    <span class="keyword">if</span> s == target:</span><br><span class="line">        <span class="comment"># print("sum(%s)=%s" % (partial, target))</span></span><br><span class="line">        hidden.append(partial)</span><br><span class="line">    <span class="keyword">if</span> s &gt;= target:</span><br><span class="line">        <span class="keyword">return</span>  <span class="comment"># if we reach the number why bother to continue</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(numbers)):</span><br><span class="line">        n = numbers[i]</span><br><span class="line">        remaining = numbers[i:]</span><br><span class="line">        subset_sum(remaining, target, partial + [n])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">subset_sum([i+<span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">36</span>)], <span class="number">36</span>)</span><br><span class="line">maxi = <span class="number">0</span>; mini = <span class="number">1000</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(hidden)):</span><br><span class="line">    wnum = <span class="number">0</span></span><br><span class="line">    hidden[i].append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(hidden[i])<span class="number">-1</span>):</span><br><span class="line">        wnum += hidden[i][j]*hidden[i][j+<span class="number">1</span>]</span><br><span class="line">    wnum += <span class="number">10</span>*hidden[i][<span class="number">0</span>]</span><br><span class="line">    maxi = wnum <span class="keyword">if</span> wnum&gt;maxi <span class="keyword">else</span> maxi</span><br><span class="line">    mini = wnum <span class="keyword">if</span> wnum&lt;mini <span class="keyword">else</span> mini</span><br><span class="line">print(<span class="string">'最多情况: '</span>, maxi, <span class="string">'\n最少情况: '</span>, mini)</span><br></pre></td></tr></table></figure>
+<pre><code>最多情况:  522
+最少情况:  46
+</code></pre><h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><p>Q4~Q5：自动编码问题</p>
+<p>假设自动编码的“编码层”$\hat{d}=1$，则对应的参数矩阵$W$就为$d\times1$，线性编码的目标函数为：<br>$$<br>E_{in}(w)=\frac{1}{N}\sum_{n=1}^N||x_n-ww^Tx_n||^2<br>$$<br>我们可以通过随机梯度下降法$err_n(w)=||x_n-ww^Tx_n||^2$求解来求解</p>
+<p>Q4：$\nabla_werr_n(w)$的表达式为什么？</p>
+<p>A4：$err=x_n^Tx_n-2x_n^Tww^Tx_n+(ww^Tx_n)^T(ww^Tx_n)$，其中只有后两项与求导相关。分别对这两项求导：<br>第一项：令$a=w^Tx_n$，从而有<br>$$<br>\nabla P1=\frac{\partial P1}{\partial a}\cdot\frac{\partial a}{\partial w}=-4a\cdot x_n=-4w^Tx_nx_n<br>$$<br>第二项：令$a=w^Tx_n=x_n^Tw,b=w^Tw$，从而$P2=aba$有：<br>$$<br>\nabla P2=\frac{\partial a}{\partial w}ba+(\frac{\partial b}{\partial w}a+\frac{\partial a}{\partial w}b)a\<br>=x_n(w^Tww^Tx_n)+2w(w^Tx_n)w^Tx_n+x_nw^Tww^Tx_n\<br>=2(x_n^Tw)^2w+2(x_n^Tw)(w^Tw)x_n<br>$$<br>上述运算要时刻看清哪些可以视为标量，所以结合第一项和第二项不难知：<br>$$<br>\nabla err=2(x_n^Tw)^2w+2(x_n^Tw)(w^Tw)x_n-4w^Tx_nx_n<br>$$<br>Q5：假设输入是含有噪声的$\hat{x}=x_n+\epsilon_n$，且$\epsilon_n\sim \mathcal{N}(0,1),i.i.d$。从而优化目标就转变为了：<br>$$<br>E_{in}(w)=\frac{1}{N}\sum_{n=1}^N||x_n-ww^T(x_n+\epsilon_n)||^2<br>$$<br>对于任意固定的$w$，求$\mathcal{E}(E_{in}(w))$</p>
+<p>A5：$E_{in}$可以拆分为：<br>$$<br>E{in}=\frac{1}{N}\sum{n=1}^N||x_n-ww^Tx_n||^2-2\sum_{n=1}^N((I-ww^T)x_n)^T(ww^T\epsilon_n)+\sum_{n=1}^{N}(ww^T\epsilon_n)^T(ww^T\epsilon_n)<br>$$<br>从而问题就转换为求$\mathcal{E}(-2\sum_{n=1}^N((I-ww^T)x_n)^T(ww^T\epsilon_n)+(ww^T\epsilon_n)^T(ww^T\epsilon_n))$，由于第一项中只涉及到$\epsilon$的一次项，且其均值为0，所以该项为0。主要针对第二项，令$A=ww^T\epsilon_n$：<br>$$<br>\mathcal{E}(\sum_{n=1}^{N}(ww^T\epsilon_n)^T(ww^T\epsilon_n))=\sum_{n=1}^{N}\mathcal{E}(A^TA)=\sum_{n=1}^{N}[(\mathcal{E}(A))^2+D(A)]=\sum_{n=1}^{N}D(A)<br>$$<br>根据<a href="http://stats.stackexchange.com/questions/31177/does-the-variance-of-a-sum-equal-the-sum-of-the-variances" target="_blank" rel="noopener">variance相加法则</a>可知，上式等价于：<br>$$<br>\sum_{n=1}^{N}D(A)=\sum_{n=1}^{N}cov(ww^T\epsilon_n, ww^T\epsilon_n)=(w^Tw)^2<br>$$</p>
+<h3 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h3><p>Q6~Q8：最近邻问题和RBF网络</p>
+<p>Q6：考虑基于两个样本$(x_1,+1),(x_2,-1)$的“1 Nearest Neighbor”假设函数，则与其等价的线性假设函数$g_{LIN}(x)=sign(w^Tx+b)$形式为什么？</p>
+<p>A6：$w^Tx+b=0$相当于分离超平面，从而可知$w=k(x_1-x_2)$如下图所示(以二维情况为例子)：<br><img src="MLT4-1/pic1.png" alt=""><br>从而可知，该超平面过点$((x_1+x_2)/2,0)$，结合这两个条件可以联立的：<br>$$<br>k(x_1-x_2)\frac{x_1+x_2}{2}+b=0\to b=\frac{k}{2}(||x_2||^2-||x_1||^2)\<br>k(x_1-x_2)x_1+\frac{k}{2}(||x_2||^2-||x_1||^2)\gt0\to k\gt0<br>$$<br>所以可以选择$k=2$</p>
+<p>Q7：考虑基于RBF网络的二元分类问题：<br>$$<br>g_{RBFNET}(x)=sign(\beta_+exp(-||x-\mu_+||^2)+\beta_-exp(-||x-\mu_-||^2))<br>$$<br>且假设$\beta_+\gt0\gt\beta_-$，则与之等价的$g_{LIN}(x)=sign(w^Tx+b)$形式是什么？</p>
+<p>A7：以+的情况来考虑<br>$$<br>\beta_+exp(-||x-\mu_+||^2)\gt-\beta_-exp(-||x-\mu_-||^2)\to -||x-\mu_+||^2+ln\beta_+\gt -||x-\mu_-||^2+ ln(-\beta_-)\<br>\to ln\frac{\beta_+}{-\beta_-}+||x-\mu_-||^2-||x-\mu_+||^2\gt0\to 2(\mu_+-\mu_-)x+ln|\frac{\beta_+}{\beta_-}|+||\mu_-^2||^2-||\mu_+||^2\gt0<br>$$<br>从而可以获得$w=2(\mu_+-\mu_-), b=ln|\frac{\beta_+}{\beta_-}|+||\mu_-^2||^2-||\mu_+||^2$</p>
+<p>Q8：假设一个全连接的RBF网络采用$RBF(x,\mu)=[[x=\mu]]$，以及在数据集上采用平方损失函数(输入数据均不相同)，则对于每个$RBF(x,x_n)$其最优的$\beta_n$为多少？</p>
+<p>A8：根据上述定义，不难知$z_n=[RBF(x_n,x_1),…,RBF(x_n,x_N)]=[0,0,..,0,1,0,…,0]$，从而$Z=I$。根据平方损失$min(Z\beta-Y)^2\to\beta=Z^{-1}Y=Y$</p>
+<h3 id="问题4"><a href="#问题4" class="headerlink" title="问题4"></a>问题4</h3><p>Q9~Q10：矩阵因子分解(Matrix Factorization)</p>
+<p>Q9：考虑“单个中间层”$\hat{d}=1$的矩阵因子分解情况，假设用户因子矩阵$V: \hat{d}\times N$初始化为1，则根据Lec15中给出的更新规则2.1，更新时最佳的$w_m$(第m部电影的电影因子向量: $\hat{d}\times 1$)为多少？<br><img src="MLT4-1/pic2.png" alt=""></p>
+<p>A9：损失函数：$\sum_{m=1}^M\sum_{(x_n,r_{nm})\in D_m}(r_{nm}-w_m^Tv_n)^2$,从而对$w_m$求导可得：<br>$$<br>2\sum_{(x_n,r_{nm})\in D_m}(r_{nm}-w_m^Tv_n)v_n=0\to w_m=\frac{\sum_n r_{nm}}{\sum_n 1}<br>$$<br>从而不难知，最佳的$w_m$为第$m$部电影的平均得分</p>
+<p>Q10：假设分数矩阵为$R: N\times M$，且我们已经获得了一个矩阵因子分解$R=V^TW$，即$r_{nm}=v_n^Tw_m$。此时，有一个新的用户$(N+1)$来了，由于我们完全没有该用户的信息，因此不知道她喜欢哪种类型的电影，所以初始化用户因子矩阵为$v_{N+1}=\frac{1}{N}\sum v_n$，因此我们的推荐系统将根据$v_{N+1}^Tw_m$中最大的电影推荐给她，则这部电影的特点为？</p>
+<p>A10：$v_{N+1}^Tw_m=\frac{1}{N}\sum_{n=1}^N v_n^Tw_m=\frac{1}{N}\sum_{n=1}^N r_{nm}$，等价于每部电影用户的平均评分，所以推荐的电影为用户平均评分最高的</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/23/MLF&MLT/MLT3/" rel="next" title="机器学习技法Lec9-Lec12">
+                <i class="fa fa-chevron-left"></i> 机器学习技法Lec9-Lec12
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/25/MLF&MLT/MLT4-2/" rel="prev" title="机器学习技法作业4：part2">
+                机器学习技法作业4：part2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习技法作业4"><span class="nav-number">1.</span> <span class="nav-text">机器学习技法作业4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1"><span class="nav-number">1.1.</span> <span class="nav-text">问题1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2"><span class="nav-number">1.2.</span> <span class="nav-text">问题2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题3"><span class="nav-number">1.3.</span> <span class="nav-text">问题3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题4"><span class="nav-number">1.4.</span> <span class="nav-text">问题4</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

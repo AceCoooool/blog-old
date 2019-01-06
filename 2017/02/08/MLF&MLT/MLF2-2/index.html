@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习基石课后作业2-2：对应题目16～题目20">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石作业2：part2">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/08/MLF&MLT/MLF2-2/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习基石课后作业2-2：对应题目16～题目20">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/08/MLF&MLT/MLF2-2/MLF2-2/Q6.png">
+<meta property="og:updated_time" content="2018-01-28T20:03:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石作业2：part2">
+<meta name="twitter:description" content="机器学习基石课后作业2-2：对应题目16～题目20">
+<meta name="twitter:image" content="https://acecoooool.github.io/blog/2017/02/08/MLF&MLT/MLF2-2/MLF2-2/Q6.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/08/MLF&MLT/MLF2-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习基石作业2：part2 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/08/MLF&MLT/MLF2-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石作业2：part2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-08 14:12:28" itemprop="dateCreated datePublished" datetime="2017-02-08T14:12:28+08:00">2017-02-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:03:22" itemprop="dateModified" datetime="2018-01-29T04:03:22+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习基石课后作业2-2：对应题目16～题目20<br><a id="more"></a></p>
+<h2 id="机器学习基石作业2"><a href="#机器学习基石作业2" class="headerlink" title="机器学习基石作业2"></a>机器学习基石作业2</h2><h2 id="问题5"><a href="#问题5" class="headerlink" title="问题5"></a>问题5</h2><p>Q16~Q20：主要考察“一刀切”式的“决策树桩”算法。以下给出单维和多维情况下的算法的“口语化”说明。其中单维对应的式子：<br>$$<br>h_{s,\theta}(x)=s\cdot sign(x-\theta)<br>$$<br>多维情况对应的式子：<br>$$<br>h_{s,i,\theta}=s\cdot sign(x_i-\theta)<br>$$</p>
+<h3 id="算法说明"><a href="#算法说明" class="headerlink" title="算法说明"></a>算法说明</h3><p><img src="MLF2-2/Q6.png" alt="单维情况"></p>
+<p>单维树桩算法</p>
+<blockquote>
+<p>假定初始数据为${(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$<br>① 预先设定N个阈值$\theta$（先对数据的$x$进行排序，将$\theta$设定为其间隙值，且取一个最小数左边的值）<br>② 计算每一个阈值$\theta$和$s=+1,-1$对应的$E_{in}$，找出其中对应最小$E_{in}$的$\theta,\ s$<br>返回$\theta,\ s,\ minE_{in}$</p>
+</blockquote>
+<p>其中①中可以采用其他的策略来实现，但具体方式是相近的。</p>
+<p>多维树桩算法</p>
+<blockquote>
+<p>假定初始数据为${(x^{(1)},y^{(1)},(x^{(2)},y^{(2)},…,(x^{(N)},y^{(N)}}$，其中$x^{(i)}\in\mathbb{R}^d$<br>①For i=1,2,…,d:<br>​     寻找维度i情况下的$\theta,\ s,\ minE_{in}$（通过单维树桩的方式求得）<br>②寻找上述$d$个不同$minE_{in}$中最小的那个，以及对应的$\theta,\ s$（如果存在两个$minE_{in}$相同则任意取一个）<br>返回$\theta,\ s,\ minE_{in}$</p>
+</blockquote>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单维度决策树桩算法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decision_stump</span><span class="params">(X, Y)</span>:</span></span><br><span class="line">    theta = np.sort(X)</span><br><span class="line">    num = len(theta)</span><br><span class="line">    Xtemp = np.tile(X, (num, <span class="number">1</span>))</span><br><span class="line">    ttemp = np.tile(np.reshape(theta, (num, <span class="number">1</span>)), (<span class="number">1</span>, num))</span><br><span class="line">    ypred = np.sign(Xtemp - ttemp)</span><br><span class="line">    ypred[ypred == <span class="number">0</span>] = <span class="number">-1</span></span><br><span class="line">    err = np.sum(ypred != Y, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> np.min(err) &lt;= num-np.max(err):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>, theta[np.argmin(err)], np.min(err)/num</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>, theta[np.argmax(err)], (num-np.max(err))/num</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多维度决策树桩算法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decision_stump_multi</span><span class="params">(X, Y)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    err = np.zeros((col,)); s = np.zeros((col,)); theta = np.zeros((col,))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(col):</span><br><span class="line">        s[i], theta[i], err[i] = decision_stump(X[:, i], Y[:, <span class="number">0</span>])</span><br><span class="line">    pos = np.argmin(err)</span><br><span class="line">    <span class="keyword">return</span> pos, s[pos], theta[pos], err[pos]</span><br></pre></td></tr></table></figure>
+<h3 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h3><p>涉及到自己生成数据问题，生成的数据满足下述两个条件：<br>(a). $x$产生于$[-1,+1]$上的均匀分布<br>(b). $y=f(x)+noise$，其中$f(x)=sign(x)$，noise则为有$20\%$的概率翻转$f(x)$的结果</p>
+<p>生成数据函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成数据函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateData</span><span class="params">()</span>:</span></span><br><span class="line">    x = np.random.uniform(<span class="number">-1</span>, <span class="number">1</span>, <span class="number">20</span>)</span><br><span class="line">    y = np.sign(x)</span><br><span class="line">    y[y == <span class="number">0</span>] = <span class="number">-1</span></span><br><span class="line">    prop = np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, <span class="number">20</span>)</span><br><span class="line">    y[prop &gt;= <span class="number">0.8</span>] *= <span class="number">-1</span></span><br><span class="line">    <span class="keyword">return</span> x, y</span><br></pre></td></tr></table></figure>
+<p>Q16：对于任意一个决策树桩函数$h_{s,\theta}\ \ \theta\in[-1,+1]$，其对应的$E_{out}(h_{s,\theta})$为以下哪一种函数？<br>a. $0.3+0.5s(1-|\theta|)$    b. $0.3+0.5s(|\theta|-1)$    c. $0.5+0.3s(|\theta|-1)$    d.$0.5+0.3s(1-|\theta|)$</p>
+<p>A16：为简便起见，假设$s=1,\theta\gt0$，此时$h$预测情况：$[\theta,1]\to +1$，$[-1,\theta]\to-1$，$f$真实情况：$(p=0.8)[-1,0]\to-1$，$(p=0.2)[-1,0]\to+1$，$(p=0.8)[0,1]\to+1$，$(p=0.2)[0,1]\to-1$。从而可见错误出现在区间$[0,\theta]$错误概率为$0.8$，其他区域错误概率为$0.2$。因此$E_{out}=(0.2(2-\theta)+0.8\theta)/2=0.2+0.3\theta$，其他三种情况类似分析，最终可得答案为c</p>
+<p>Q17&amp;Q18：根据规则随机生成20组数据，运行5,000次，求平均$E_{in}$和平均$E_{out}$（其中$E_{out}$由Q16中的答案来求解）？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q17和Q18</span></span><br><span class="line">totalin = <span class="number">0</span>; totalout = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5000</span>):</span><br><span class="line">    X, Y = generateData()</span><br><span class="line">    theta = np.sort(X)</span><br><span class="line">    s, theta, errin = decision_stump(X, Y)</span><br><span class="line">    errout = <span class="number">0.5</span>+<span class="number">0.3</span>*s*(math.fabs(theta)<span class="number">-1</span>)</span><br><span class="line">    totalin += errin</span><br><span class="line">    totalout += errout</span><br><span class="line">print(<span class="string">'训练集平均误差: '</span>, totalin/<span class="number">5000</span>)</span><br><span class="line">print(<span class="string">'测试集平均误差: '</span>, totalout/<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>训练集平均误差:  0.17111
+测试集平均误差:  0.2613195070168455
+</code></pre><p><strong>Q19&amp;Q20</strong>导入数据集函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入数据函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadData</span><span class="params">(filename)</span>:</span></span><br><span class="line">    data = pd.read_csv(filename, sep=<span class="string">'\s+'</span>, header=<span class="keyword">None</span>)</span><br><span class="line">    data = data.as_matrix()</span><br><span class="line">    col, row = data.shape</span><br><span class="line">    X = np.c_[np.ones((col, <span class="number">1</span>)), data[:, <span class="number">0</span>: row<span class="number">-1</span>]]</span><br><span class="line">    Y = data[:, row<span class="number">-1</span>:row]</span><br><span class="line">    <span class="keyword">return</span> X, Y</span><br></pre></td></tr></table></figure>
+<p>Q19&amp;Q20：求多维决策树桩在训练集和测试集上的误差$E_{in}$和$E_{out}$？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q19和Q20</span></span><br><span class="line">X, Y = loadData(<span class="string">'hw2_train.dat'</span>)</span><br><span class="line">Xtest, Ytest = loadData(<span class="string">'hw2_test.dat'</span>)</span><br><span class="line">pos, s, theta, err = decision_stump_multi(X, Y)</span><br><span class="line">print(<span class="string">'训练集误差: '</span>, err)</span><br><span class="line">ypred = s*np.sign(Xtest[:, pos]-theta)</span><br><span class="line">ypred[ypred == <span class="number">0</span>] = <span class="number">-1</span></span><br><span class="line">row, col = Ytest.shape</span><br><span class="line">errout = np.sum(ypred != Ytest.reshape(row,))/len(ypred)</span><br><span class="line">print(<span class="string">'测试集误差: '</span>, errout)</span><br></pre></td></tr></table></figure>
+<pre><code>训练集误差:  0.25
+测试集误差:  0.355
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/07/MLF&MLT/MLF2-1/" rel="next" title="机器学习基石作业2：part1">
+                <i class="fa fa-chevron-left"></i> 机器学习基石作业2：part1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/09/MLF&MLT/MLF3-1/" rel="prev" title="机器学习基石作业3：part1">
+                机器学习基石作业3：part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习基石作业2"><span class="nav-number">1.</span> <span class="nav-text">机器学习基石作业2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题5"><span class="nav-number">2.</span> <span class="nav-text">问题5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法说明"><span class="nav-number">2.1.</span> <span class="nav-text">算法说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现"><span class="nav-number">2.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体问题"><span class="nav-number">2.3.</span> <span class="nav-text">具体问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习技法课后作业2-1：对应题目12～题目20">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习技法作业2：part2">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2-2/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习技法课后作业2-1：对应题目12～题目20">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-28T20:13:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习技法作业2：part2">
+<meta name="twitter:description" content="机器学习技法课后作业2-1：对应题目12～题目20">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习技法作业2：part2 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/17/MLF&MLT/MLT2-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习技法作业2：part2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-17 19:28:21" itemprop="dateCreated datePublished" datetime="2017-02-17T19:28:21+08:00">2017-02-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:13:38" itemprop="dateModified" datetime="2018-01-29T04:13:38+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习技法课后作业2-1：对应题目12～题目20<br><a id="more"></a></p>
+<h2 id="机器学习技法作业2"><a href="#机器学习技法作业2" class="headerlink" title="机器学习技法作业2"></a>机器学习技法作业2</h2><h2 id="问题12-18"><a href="#问题12-18" class="headerlink" title="问题12-18"></a>问题12-18</h2><p>通过PPT208介绍的adaboost算法，实现一个AdaBoost-Stump算法。并在给定的训练集和测试集上进行运行。<br>采用$T=300$次迭代（即采用300个决策树桩函数），最终的$E_{in}$和$E_{out}$采用$0/1$误差</p>
+<p>决策树桩的实现可根据下述的步骤进行：<br>① 对于任意特征$i$，可以先对该维度数据$x_{n,i}$进行排序，排序后满足：$x_{|n|,i}\le x_{|n+1|,i}$<br>② 考虑截距从$-\infty$以及所有的中点$(x_{|n|,i}+x_{|n+1|,i})/2$，并结合$s={+1,-1}$通过最小化该维度$i$对应的最小$E_{in}^u$来获得最佳的$(s,\theta)$<br>③ 针对所有的维度，选取最佳的$(s,i,\theta)$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入库</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> scipy.linalg <span class="keyword">as</span> lin</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载数据函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadData</span><span class="params">(filename)</span>:</span></span><br><span class="line">    data = pd.read_csv(filename, sep=<span class="string">'\s+'</span>, header=<span class="keyword">None</span>)</span><br><span class="line">    data = data.as_matrix()</span><br><span class="line">    col, row = data.shape</span><br><span class="line">    X = data[:, <span class="number">0</span>: row<span class="number">-1</span>]</span><br><span class="line">    Y = data[:, row<span class="number">-1</span>:row]</span><br><span class="line">    <span class="keyword">return</span> X, Y</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 决策树桩</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decision_stump</span><span class="params">(X, Y, thres, U)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    r, c = thres.shape; besterr = <span class="number">1</span></span><br><span class="line">    btheta = <span class="number">0</span>; bs = <span class="number">0</span>; index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(col):</span><br><span class="line">        Yhat1 = np.sign(np.tile(X[:, i:i+<span class="number">1</span>], (<span class="number">1</span>, r)).T-thres[:, i:i+<span class="number">1</span>]).T</span><br><span class="line">        err1 = (Yhat1!=Y).T.dot(U)</span><br><span class="line">        err2 = (<span class="number">-1</span>*Yhat1!=Y).T.dot(U)</span><br><span class="line">        s = <span class="number">1</span> <span class="keyword">if</span> np.min(err1) &lt; np.min(err2) <span class="keyword">else</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">1</span> <span class="keyword">and</span> np.min(err1) &lt; besterr:</span><br><span class="line">            besterr = np.min(err1); bs = <span class="number">1</span></span><br><span class="line">            index = i; btheta = thres[np.argmin(err1), i]</span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">-1</span> <span class="keyword">and</span> np.min(err2) &lt; besterr:</span><br><span class="line">            besterr = np.min(err2); bs = <span class="number">-1</span></span><br><span class="line">            index = i; btheta = thres[np.argmin(err2), i]</span><br><span class="line">    <span class="keyword">return</span> besterr, btheta, bs, index</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AdaBoost---Stump 算法</span></span><br><span class="line"><span class="comment"># 需要说明: 与PPT上有点不同，始终保证sum(U)=1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ada_boost</span><span class="params">(X, Y, T)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    U = np.ones((row, <span class="number">1</span>))/row</span><br><span class="line">    Xsort = np.sort(X, <span class="number">0</span>)</span><br><span class="line">    thres = (np.r_[Xsort[<span class="number">0</span>:<span class="number">1</span>, :] - <span class="number">0.1</span>, Xsort[<span class="number">0</span>:row - <span class="number">1</span>, :]] + Xsort) / <span class="number">2</span></span><br><span class="line">    theta = np.zeros((T,)); s = np.zeros((T,));</span><br><span class="line">    index = np.zeros((T,)).astype(int); alpha = np.zeros((T,))</span><br><span class="line">    err = np.zeros((T,))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(T):</span><br><span class="line">        err[i], theta[i], s[i], index[i] = decision_stump(X, Y, thres, U)</span><br><span class="line">        yhat = s[i]*np.sign(X[:, index[i]:index[i]+<span class="number">1</span>]-theta[i])</span><br><span class="line">        delta = np.sqrt((<span class="number">1</span>-err[i])/err[i])</span><br><span class="line">        U[yhat==Y] /= delta</span><br><span class="line">        U[yhat!=Y] *= delta</span><br><span class="line"><span class="comment"># Q14运行时，解除注释</span></span><br><span class="line"><span class="comment">#        if i == T-1:</span></span><br><span class="line"><span class="comment">#            print('sum(U): ', np.sum(U))</span></span><br><span class="line">        alpha[i] = np.log(delta)</span><br><span class="line">        U /= np.sum(U)</span><br><span class="line"><span class="comment"># Q15运行时，解除注释</span></span><br><span class="line"><span class="comment">#    print('最小的eta: ', np.min(err))</span></span><br><span class="line">    <span class="keyword">return</span> theta, index, s, alpha</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X, theta, index, s, alpha)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    num = len(theta)</span><br><span class="line">    ytemp = np.tile(s.reshape((<span class="number">1</span>, num)), (row, <span class="number">1</span>))*np.sign(X[:, index]-theta.reshape((<span class="number">1</span>, num)))</span><br><span class="line">    yhat = np.sign(ytemp.dot(alpha.reshape(num, <span class="number">1</span>)))</span><br><span class="line">    <span class="keyword">return</span> yhat</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">X, Y = loadData(<span class="string">'hw2_adaboost_train.dat'</span>)</span><br><span class="line">Xtest, Ytest = loadData(<span class="string">'hw2_adaboost_test.dat'</span>)</span><br><span class="line">row, col = X.shape</span><br><span class="line">r, c = Xtest.shape</span><br></pre></td></tr></table></figure>
+<h3 id="问题12"><a href="#问题12" class="headerlink" title="问题12"></a>问题12</h3><p>Q12：$E_{in}(g_1)$的结果为多少？</p>
+<p>A12：令T=1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q12</span></span><br><span class="line">theta, index, s, alpha = ada_boost(X, Y, <span class="number">1</span>)</span><br><span class="line">Ypred = predict(X, theta, index, s, alpha)</span><br><span class="line">print(<span class="string">'Ein(g1)：'</span>, np.sum(Ypred!=Y)/row)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein(g1)： 0.24
+</code></pre><h3 id="问题13"><a href="#问题13" class="headerlink" title="问题13"></a>问题13</h3><p>Q13：$E_{in}(G)$的结果为多少？</p>
+<p>A13：T=300</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q13</span></span><br><span class="line">theta, index, s, alpha = ada_boost(X, Y, <span class="number">300</span>)</span><br><span class="line">Ypred = predict(X, theta, index, s, alpha)</span><br><span class="line">print(<span class="string">'Ein(G)：'</span>, np.sum(Ypred!=Y)/r)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein(G)： 0.0
+</code></pre><h3 id="问题14"><a href="#问题14" class="headerlink" title="问题14"></a>问题14</h3><p>Q14：令$U_t=\sum_{n=1}^Nu_n^{(t)}$，$U_2$的值是多少（$U_1=1$）？</p>
+<p>A14：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q14 --- 打开上述注释项，在运行一次</span></span><br><span class="line">theta, index, s, alpha = ada_boost(X, Y, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>sum(U):  0.854166260163
+</code></pre><h3 id="问题15"><a href="#问题15" class="headerlink" title="问题15"></a>问题15</h3><p>Q15：$U_T$的值是多少？</p>
+<p>A15：该问题采用“和为1”化后无法给出理想答案，但是取消“和为1”的条件，则会导致程序跑崩。希望知道如何改善的给点提示</p>
+<h3 id="问题16"><a href="#问题16" class="headerlink" title="问题16"></a>问题16</h3><p>Q16：对于$t=1,2,…,300$的所有$\epsilon_t$中，最小的值为多少？</p>
+<p>A16：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q16 </span></span><br><span class="line">theta, index, s, alpha = ada_boost(X, Y, <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>最小的epsilon:  0.178728070175
+</code></pre><h3 id="问题17"><a href="#问题17" class="headerlink" title="问题17"></a>问题17</h3><p>Q17：对测试集计算$E_{out}$，对应的$E_{out}(g_1)$为多少？</p>
+<p>A17：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q17</span></span><br><span class="line">theta, index, s, alpha = ada_boost(X, Y, <span class="number">1</span>)</span><br><span class="line">Ypred = predict(Xtest, theta, index, s, alpha)</span><br><span class="line">print(<span class="string">'Eout(g1)：'</span>, np.sum(Ypred!=Ytest)/r)</span><br></pre></td></tr></table></figure>
+<pre><code>Eout(g1)： 0.29
+</code></pre><h3 id="问题18"><a href="#问题18" class="headerlink" title="问题18"></a>问题18</h3><p>Q18：对测试集计算$E_{out}$，对应的$E_{out}(G)$为多少？</p>
+<p>A18：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q18</span></span><br><span class="line">theta, index, s, alpha = ada_boost(X, Y, <span class="number">300</span>)</span><br><span class="line">Ypred = predict(Xtest, theta, index, s, alpha)</span><br><span class="line">print(<span class="string">'Eout(G)：'</span>, np.sum(Ypred!=Ytest)/r)</span><br></pre></td></tr></table></figure>
+<pre><code>Eout(G)： 0.132
+</code></pre><h2 id="问题19-20"><a href="#问题19-20" class="headerlink" title="问题19-20"></a>问题19-20</h2><p>根据Lec206实现一个kernel ridge regression算法，并将其运用到分类问题中。根据给定的数据集，取其前400个样本作为训练集，剩余的样本作为测试集。利用$0/1$误差计算$E_{in}$和$E_{out}$。考虑采用高斯核$exp(-\gamma ||x-x^\prime||^2)$，并尝试下述所有的参数$\gamma\in{32,2,0.125}$和$\lambda\in{0.001,1,1000}$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ----------- Q19-20 --------------</span></span><br><span class="line"><span class="comment"># 获得对偶矩阵K</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">matK</span><span class="params">(X, X1, gamma)</span>:</span></span><br><span class="line">    row, col =X.shape</span><br><span class="line">    r, c = X1.shape</span><br><span class="line">    K = np.zeros((row, r))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(r):</span><br><span class="line">        K[:, i] = np.sum((X-X1[i:i+<span class="number">1</span>, :])**<span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">    K = np.exp(-gamma*K)</span><br><span class="line">    <span class="keyword">return</span> K</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载数据</span></span><br><span class="line">X, Y = loadData(<span class="string">'hw2_lssvm_all.dat'</span>)</span><br><span class="line">Xtrain = X[<span class="number">0</span>:<span class="number">400</span>, :]; Ytrain = Y[<span class="number">0</span>:<span class="number">400</span>, :]</span><br><span class="line">Xtest = X[<span class="number">400</span>:, :]; Ytest = Y[<span class="number">400</span>:, :]</span><br><span class="line">row, col = Xtest.shape</span><br></pre></td></tr></table></figure>
+<h3 id="问题19-amp-问题20"><a href="#问题19-amp-问题20" class="headerlink" title="问题19&amp;问题20"></a>问题19&amp;问题20</h3><p>Q19&amp;Q20：以上给出的所有参数组合中，最小的$E_{in}(g)$和最小的$E_{out}(g)$分别是多少？</p>
+<p>A19&amp;A20：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">gamma = [<span class="number">32</span>, <span class="number">2</span>, <span class="number">0.125</span>]</span><br><span class="line">lamb = [<span class="number">0.001</span>, <span class="number">1</span>, <span class="number">1000</span>]</span><br><span class="line">Ein = np.zeros((len(gamma), len(lamb)))</span><br><span class="line">Eout = np.zeros((len(gamma), len(lamb)))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(gamma)):</span><br><span class="line">    K = matK(Xtrain, Xtrain, gamma[i])</span><br><span class="line">    K2 = matK(Xtrain, Xtest, gamma[i])</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(lamb)):</span><br><span class="line">        beta = lin.pinv(lamb[j]*np.eye(<span class="number">400</span>)+K).dot(Ytrain)</span><br><span class="line">        yhat = np.sign(K.dot(beta))</span><br><span class="line">        Ein[i, j] = np.sum(yhat != Ytrain)/<span class="number">400</span></span><br><span class="line">        yhat2 = np.sign(K2.T.dot(beta))</span><br><span class="line">        Eout[i, j] = np.sum(yhat2 != Ytest)/row</span><br><span class="line">print(<span class="string">'最小的Ein: '</span>, np.min(Ein))</span><br><span class="line">print(<span class="string">'最小的Eout: '</span>, np.min(Eout))</span><br></pre></td></tr></table></figure>
+<pre><code>最小的Ein:  0.0
+最小的Eout:  0.39
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/17/MLF&MLT/MLT2-1/" rel="next" title="机器学习技法作业2：part1">
+                <i class="fa fa-chevron-left"></i> 机器学习技法作业2：part1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/17/MLF&MLT/MLT2/" rel="prev" title="机器学习技法Lec5-Lec8">
+                机器学习技法Lec5-Lec8 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习技法作业2"><span class="nav-number">1.</span> <span class="nav-text">机器学习技法作业2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题12-18"><span class="nav-number">2.</span> <span class="nav-text">问题12-18</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题12"><span class="nav-number">2.1.</span> <span class="nav-text">问题12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题13"><span class="nav-number">2.2.</span> <span class="nav-text">问题13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题14"><span class="nav-number">2.3.</span> <span class="nav-text">问题14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题15"><span class="nav-number">2.4.</span> <span class="nav-text">问题15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题16"><span class="nav-number">2.5.</span> <span class="nav-text">问题16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题17"><span class="nav-number">2.6.</span> <span class="nav-text">问题17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题18"><span class="nav-number">2.7.</span> <span class="nav-text">问题18</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题19-20"><span class="nav-number">3.</span> <span class="nav-text">问题19-20</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题19-amp-问题20"><span class="nav-number">3.1.</span> <span class="nav-text">问题19&amp;问题20</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

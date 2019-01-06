@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习技法课后作业3-1：对应题目13～题目20">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习技法作业3：part2">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3-2/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习技法课后作业3-1：对应题目13～题目20">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-28T20:14:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习技法作业3：part2">
+<meta name="twitter:description" content="机器学习技法课后作业3-1：对应题目13～题目20">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习技法作业3：part2 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/23/MLF&MLT/MLT3-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习技法作业3：part2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-23 11:35:47" itemprop="dateCreated datePublished" datetime="2017-02-23T11:35:47+08:00">2017-02-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:14:02" itemprop="dateModified" datetime="2018-01-29T04:14:02+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习技法课后作业3-1：对应题目13～题目20<br><a id="more"></a></p>
+<h2 id="机器学习技法作业3"><a href="#机器学习技法作业3" class="headerlink" title="机器学习技法作业3"></a>机器学习技法作业3</h2><h3 id="问题5"><a href="#问题5" class="headerlink" title="问题5"></a>问题5</h3><p>Q13~Q15：关于决策树的问题。</p>
+<p>基于课堂所介绍的C&amp;RT算法：基于Gini系数，无剪枝。来实现并对所给的数据集进行实验。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为了实现决策树，需建立树结点的类</span></span><br><span class="line"><span class="comment"># 定义树结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, theta, index, value=None)</span>:</span></span><br><span class="line">        self.theta = theta     <span class="comment"># 划分的阈值</span></span><br><span class="line">        self.index = index     <span class="comment"># 选用的维度</span></span><br><span class="line">        self.value = value     <span class="comment"># 根节点的值</span></span><br><span class="line">        self.leftNode = <span class="keyword">None</span></span><br><span class="line">        self.rightNode = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义Gini系数---作为每个子集“好坏”的衡量标准</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gini</span><span class="params">(Y)</span>:</span></span><br><span class="line">    l = Y.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">if</span> l == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>-(np.sum(Y==<span class="number">1</span>)/l)**<span class="number">2</span>-(np.sum(Y==<span class="number">-1</span>)/l)**<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为了便于实现，找出每一维度下的最佳划分阈值和对应的branch值 --- 但这样实现代价是运行速度</span></span><br><span class="line"><span class="comment"># 单维情况下的最佳树桩---大于等于为1类</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">one_stump</span><span class="params">(X, Y, thres)</span>:</span></span><br><span class="line">    l = thres.shape[<span class="number">0</span>]</span><br><span class="line">    mini = Y.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</span><br><span class="line">        Y1 = Y[X&lt;thres[i]]</span><br><span class="line">        Y2 = Y[X&gt;=thres[i]]</span><br><span class="line">        judge = Y1.shape[<span class="number">0</span>]*gini(Y1)+Y2.shape[<span class="number">0</span>]*gini(Y2)</span><br><span class="line">        <span class="keyword">if</span> mini&gt;judge:</span><br><span class="line">            mini = judge; b = thres[i]</span><br><span class="line">    <span class="keyword">return</span> mini, b</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义划分终止的条件</span></span><br><span class="line"><span class="comment"># 终止条件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stop_cond</span><span class="params">(X, Y)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> np.sum(Y!=Y[<span class="number">0</span>])==<span class="number">0</span> <span class="keyword">or</span> X.shape[<span class="number">0</span>]==<span class="number">1</span> <span class="keyword">or</span> np.sum(X!=X[<span class="number">0</span>, :])==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义完全生长的决策树</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dTree</span><span class="params">(X, Y)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> stop_cond(X, Y):</span><br><span class="line">        node = Node(<span class="keyword">None</span>, <span class="keyword">None</span>, Y[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> node</span><br><span class="line">    b, index = decision_stump(X, Y)</span><br><span class="line">    pos1 = X[:, index] &lt; b; pos2 = X[:, index] &gt;= b</span><br><span class="line">    leftX = X[pos1, :]; leftY = Y[pos1, <span class="number">0</span>:<span class="number">1</span>]</span><br><span class="line">    rightX = X[pos2, :]; rightY = Y[pos2, <span class="number">0</span>:<span class="number">1</span>]</span><br><span class="line">    node = Node(b, index)</span><br><span class="line">    node.leftNode = dTree(leftX, leftY)</span><br><span class="line">    node.rightNode = dTree(rightX, rightY)</span><br><span class="line">    <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测函数---基于决策树对单个样本进行的预测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict_one</span><span class="params">(node, X)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> node.value <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> node.value[<span class="number">0</span>]</span><br><span class="line">    thre = node.theta; index = node.index</span><br><span class="line">    <span class="keyword">if</span> X[index] &lt; thre:</span><br><span class="line">        <span class="keyword">return</span> predict_one(node.leftNode, X)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> predict_one(node.rightNode, X)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基于决策树的预测结果及其错误率衡量函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">err_fun</span><span class="params">(X, Y, node)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    Yhat = np.zeros(Y.shape)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(row):</span><br><span class="line">        Yhat[i] = predict_one(node, X[i, :])</span><br><span class="line">    <span class="keyword">return</span> Yhat, np.sum(Yhat!=Y)/row</span><br></pre></td></tr></table></figure>
+<p>Q13：获得的决策树$G$含有多少内部结点(不包括叶子结点，即所有包含阈值分割的结点)？</p>
+<p>A13：需要定义一个搜索树有几个结点的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q13</span></span><br><span class="line"><span class="comment"># 定义一个搜索树有多少结点的函数---叶子结点不计入</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">internal_node</span><span class="params">(node)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> node == <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> node.leftNode == <span class="keyword">None</span> <span class="keyword">and</span> node.rightNode == <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    l = <span class="number">0</span>; r = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> node.leftNode != <span class="keyword">None</span>:</span><br><span class="line">        l = internal_node(node.leftNode)</span><br><span class="line">    <span class="keyword">if</span> node.rightNode != <span class="keyword">None</span>:</span><br><span class="line">        r = internal_node(node.rightNode)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> + l + r</span><br><span class="line"></span><br><span class="line">node = dTree(X, Y)</span><br><span class="line">print(<span class="string">'完全生长的决策树内部结点数目：'</span>, internal_node(node))</span><br></pre></td></tr></table></figure>
+<pre><code>完全生长的决策树内部结点数目： 10
+</code></pre><p>Q14和Q15：基于$0/1$误差判据的训练集和验证集的错误率$E_{in},E_{out}$分别是多少？</p>
+<p>A14和A15：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q14 and Q15</span></span><br><span class="line">_, ein = err_fun(X, Y, node)</span><br><span class="line">_, eout = err_fun(Xtest, Ytest, node)</span><br><span class="line">print(<span class="string">'Ein: '</span>, ein, <span class="string">'\nEout: '</span>, eout)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein:  0.0 
+Eout:  0.126
+</code></pre><h3 id="问题6"><a href="#问题6" class="headerlink" title="问题6"></a>问题6</h3><p>Q16~Q18：关于随机森林算法</p>
+<p>采用$N^\prime=N$的bagging策略，并结合上述实现的决策树算法，构造随机森林。实践中进行$T=300$次bagging(即生成300棵树)，并进行100次(为了节约时间，采用50次)实验取平均的$E_{in},E_{out}$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bagging函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bagging</span><span class="params">(X, Y)</span>:</span></span><br><span class="line">    row, col = X.shape</span><br><span class="line">    pos = np.random.randint(<span class="number">0</span>, row, (row,))</span><br><span class="line">    <span class="keyword">return</span> X[pos, :], Y[pos, :]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机森林算法---没有加入feature的随机选择</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_forest</span><span class="params">(X, Y, T)</span>:</span></span><br><span class="line">    nodeArr = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(T):</span><br><span class="line">        Xtemp, Ytemp = bagging(X, Y)</span><br><span class="line">        node = dTree(Xtemp, Ytemp)</span><br><span class="line">        nodeArr.append(node)</span><br><span class="line">    <span class="keyword">return</span> nodeArr</span><br></pre></td></tr></table></figure>
+<p>Q16~Q18：分别求30000(此处采用15000)棵决策树误差的平均$E_{in}(g_t)$，以及平均误差$E_{in}(G_{RF}),E_{out}(G_{RF})$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q16,Q17,Q18</span></span><br><span class="line">ein = <span class="number">0</span>; eout = <span class="number">0</span>; err = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    nodeArr = random_forest(X, Y, <span class="number">300</span>)</span><br><span class="line">    l = len(nodeArr)</span><br><span class="line">    yhat1 = np.zeros((Y.shape[<span class="number">0</span>], l))</span><br><span class="line">    yhat2 = np.zeros((Ytest.shape[<span class="number">0</span>], l))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</span><br><span class="line">        yhat1[:, i:i+<span class="number">1</span>], _ = err_fun(X, Y, nodeArr[i])</span><br><span class="line">        yhat2[:, i:i+<span class="number">1</span>], _ = err_fun(Xtest, Ytest, nodeArr[i])</span><br><span class="line">    errg = np.sum(yhat1!=Y, <span class="number">0</span>)/Y.shape[<span class="number">0</span>]</span><br><span class="line">    Yhat = np.sign(np.sum(yhat1, <span class="number">1</span>)).reshape(Y.shape)</span><br><span class="line">    Ytesthat = np.sign(np.sum(yhat2, <span class="number">1</span>)).reshape(Ytest.shape)</span><br><span class="line">    Yhat[Yhat == <span class="number">0</span>] = <span class="number">1</span>; Ytesthat[Ytesthat == <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    ein += np.sum(Yhat!=Y)/Y.shape[<span class="number">0</span>]</span><br><span class="line">    eout += np.sum(Ytesthat!=Ytest)/Ytest.shape[<span class="number">0</span>]</span><br><span class="line">    err += np.sum(errg)/l</span><br><span class="line">print(<span class="string">'Ein(gt)的平均：'</span>, err/<span class="number">50</span>)</span><br><span class="line">print(<span class="string">'Ein(G): '</span>, ein/<span class="number">50</span>)</span><br><span class="line">print(<span class="string">'Eout(G): '</span>, eout/<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein(gt)的平均： 0.0518873333333
+Ein(G):  0.0
+Eout(G):  0.07452
+</code></pre><h3 id="问题7"><a href="#问题7" class="headerlink" title="问题7"></a>问题7</h3><p>Q19~Q20：基于“超级”剪枝的随机森林算法</p>
+<p>将每棵决策树限制为只有一个分支的情况。即相当于变成了一个决策树桩。与问题6中采用同样的bagging策略。重复实验，求对应的平均$E_{in}(G_{RS}),E_{out}(G_{RS})$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义只进行一次划分的决策树（夸张的剪枝）</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dTree_one</span><span class="params">(X, Y)</span>:</span></span><br><span class="line">    b, index = decision_stump(X, Y)</span><br><span class="line">    pos1 = X[:, index] &lt; b; pos2 = X[:, index] &gt;= b</span><br><span class="line">    node = Node(b, index)</span><br><span class="line">    value1 = <span class="number">1</span> <span class="keyword">if</span> np.sign(np.sum(Y[pos1]))&gt;=<span class="number">0</span> <span class="keyword">else</span> <span class="number">-1</span></span><br><span class="line">    value2 = <span class="number">1</span> <span class="keyword">if</span> np.sign(np.sum(Y[pos2]))&gt;=<span class="number">0</span> <span class="keyword">else</span> <span class="number">-1</span></span><br><span class="line">    node.leftNode = Node(<span class="keyword">None</span>, <span class="keyword">None</span>, np.array([value1]))</span><br><span class="line">    node.rightNode = Node(<span class="keyword">None</span>, <span class="keyword">None</span>, np.array([value2]))</span><br><span class="line">    <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基于剪枝后的随机森林算法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_forest_pruned</span><span class="params">(X, Y, T)</span>:</span></span><br><span class="line">    nodeArr = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(T):</span><br><span class="line">        Xtemp, Ytemp = bagging(X, Y)</span><br><span class="line">        node = dTree_one(Xtemp, Ytemp)</span><br><span class="line">        nodeArr.append(node)</span><br><span class="line">    <span class="keyword">return</span> nodeArr</span><br></pre></td></tr></table></figure>
+<p>A19~A20：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q19, Q20</span></span><br><span class="line">ein = <span class="number">0</span>; eout = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    nodeArr = random_forest_pruned(X, Y, <span class="number">300</span>)</span><br><span class="line">    l = len(nodeArr)</span><br><span class="line">    yhat1 = np.zeros((Y.shape[<span class="number">0</span>], l))</span><br><span class="line">    yhat2 = np.zeros((Ytest.shape[<span class="number">0</span>], l))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</span><br><span class="line">        yhat1[:, i:i + <span class="number">1</span>], _ = err_fun(X, Y, nodeArr[i])</span><br><span class="line">        yhat2[:, i:i + <span class="number">1</span>], _ = err_fun(Xtest, Ytest, nodeArr[i])</span><br><span class="line">    Yhat = np.sign(np.sum(yhat1, <span class="number">1</span>)).reshape(Y.shape)</span><br><span class="line">    Ytesthat = np.sign(np.sum(yhat2, <span class="number">1</span>)).reshape(Ytest.shape)</span><br><span class="line">    Yhat[Yhat == <span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    Ytesthat[Ytesthat == <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    ein += np.sum(Yhat != Y) / Y.shape[<span class="number">0</span>]</span><br><span class="line">    eout += np.sum(Ytesthat != Ytest) / Ytest.shape[<span class="number">0</span>]</span><br><span class="line">print(<span class="string">'Ein: '</span>, ein/<span class="number">50</span>)</span><br><span class="line">print(<span class="string">'Eout: '</span>, eout/<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Ein:  0.1106
+Eout:  0.15336
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/21/MLF&MLT/MLT3-1/" rel="next" title="机器学习技法作业3：part1">
+                <i class="fa fa-chevron-left"></i> 机器学习技法作业3：part1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/23/MLF&MLT/MLT3/" rel="prev" title="机器学习技法Lec9-Lec12">
+                机器学习技法Lec9-Lec12 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习技法作业3"><span class="nav-number">1.</span> <span class="nav-text">机器学习技法作业3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题5"><span class="nav-number">1.1.</span> <span class="nav-text">问题5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题6"><span class="nav-number">1.2.</span> <span class="nav-text">问题6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题7"><span class="nav-number">1.3.</span> <span class="nav-text">问题7</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习技法Lec5-Lec8主要知识点：对应作业2">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习技法Lec5-Lec8">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习技法Lec5-Lec8主要知识点：对应作业2">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic1.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic2.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic3.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic4.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic5.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic6.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic7.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic8.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic9.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic10.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic11.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic12.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic13.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic14.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic15.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic16.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic17.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic18.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic19.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic20.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic21.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic23.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic22.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic24.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic25.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic26.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic27.png">
+<meta property="og:updated_time" content="2018-01-28T20:13:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习技法Lec5-Lec8">
+<meta name="twitter:description" content="机器学习技法Lec5-Lec8主要知识点：对应作业2">
+<meta name="twitter:image" content="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/MLT2/pic1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/17/MLF&MLT/MLT2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习技法Lec5-Lec8 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/17/MLF&MLT/MLT2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习技法Lec5-Lec8
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-17 20:27:17" itemprop="dateCreated datePublished" datetime="2017-02-17T20:27:17+08:00">2017-02-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:13:08" itemprop="dateModified" datetime="2018-01-29T04:13:08+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习技法Lec5-Lec8主要知识点：对应作业2<br><a id="more"></a></p>
+<h2 id="基于核函数的Logistic回归"><a href="#基于核函数的Logistic回归" class="headerlink" title="基于核函数的Logistic回归"></a>基于核函数的Logistic回归</h2><h3 id="柔性SVM与含正则项模型"><a href="#柔性SVM与含正则项模型" class="headerlink" title="柔性SVM与含正则项模型"></a>柔性SVM与含正则项模型</h3><p>根据柔性SVM的定义，可以获得其等价的无约束情况：<br><img src="MLT2/pic1.png" alt=""><br>从无约束SVM的表达式可见，其非常“相似于”加入了$L_2$正则项的模型：<br><img src="MLT2/pic2.png" alt=""><br>上述情况可见柔性SVM本质就是含有一个特殊$err$，以及利用另一个参数$C$替代$\lambda$以及选用更小的$w$的含正则项的模型。</p>
+<p><strong>结合上篇文章中指出的，不管是柔性SVM还是hard-margin SVM均可以视为含正则项的模型</strong>：<br><img src="MLT2/pic3.png" alt=""><br>上述表格中包含一定的对应关系：<br>① 大的边界$\iff$更少可供选择的超平面$\iff$$L_2$正则化里将$w$限制的更小<br>② 柔性边界$\iff$特殊的损失函数$\hat{err}$<br>③ 大的“越界惩罚”$C$$\iff$更小的$\lambda\iff$“更弱”的正则化（其实就是更大的假设函数集）</p>
+<p>将SVM看做含正则项的模型，这样更有助于理解和扩展</p>
+<h3 id="柔性SVM-vs-Logistic回归"><a href="#柔性SVM-vs-Logistic回归" class="headerlink" title="柔性SVM vs Logistic回归"></a>柔性SVM vs Logistic回归</h3><p>柔性SVM的错误度量标准可以视为一种特殊的错误度量标准，将其与Logistic回归的错误度量标准进行比较：<br><img src="MLT2/pic4.png" alt=""><br>可以看出，当$ys\to-\infty or+\infty$时，$err_{SVM}\approx err_{SCE}$，所以$SVM\approx L2$正则化的Logistic回归</p>
+<h3 id="SVM用于柔性二元分类"><a href="#SVM用于柔性二元分类" class="headerlink" title="SVM用于柔性二元分类"></a>SVM用于柔性二元分类</h3><p>将SVM与Logistic回归结合起来，可以用于柔性二元分类（即以概率的形式给出结果），其具体的算法和优化目标如下所示：<br><img src="MLT2/pic5.png" alt=""><br>其中步骤①就是常规的SVM解法，步骤②可以采用梯度下降法来获得最优的$(A,B)$</p>
+<h3 id="表示理论（什么情况适用核函数）"><a href="#表示理论（什么情况适用核函数）" class="headerlink" title="表示理论（什么情况适用核函数）"></a>表示理论（什么情况适用核函数）</h3><p>首先给出表示理论的说明：<br><img src="MLT2/pic6.png" alt=""><br>给出解释：<br><img src="MLT2/pic7.png" alt=""><br>从而可见，对于任意$L_2$正则化的线性模型均可以采用核函数的方式！！！</p>
+<h3 id="基于核函数的logistic回归"><a href="#基于核函数的logistic回归" class="headerlink" title="基于核函数的logistic回归"></a>基于核函数的logistic回归</h3><p>将$w$最优解$w^\star=\sum_{n=1}^N\beta_nz_n$代入Logistic回归的目标函数，可以将其转换为核函数形式，且将求最优$w$的问题转变为求最优$\beta$的问题：<br><img src="MLT2/pic8.png" alt=""><br>从上述可见，目标函数变得非常类似与SVM。但需要注意的是，该目标函数解得的$\beta$并不类似于SVM求得的$\alpha$具有很强的稀疏性。对于核函数的Logistic回归所求得的$\beta$大部分都是非零的。<br>可以如此理解，Logistic回归中是将所以数据均考虑进来，并没有支撑向量这个概念。不管转变与否，每个数据在Logtistic中至始至终都是被使用着。</p>
+<h2 id="SVR-Support-Vector-Regression"><a href="#SVR-Support-Vector-Regression" class="headerlink" title="SVR(Support Vector Regression)"></a>SVR(Support Vector Regression)</h2><h3 id="基于核函数的Ridge回归问题-LLSVM"><a href="#基于核函数的Ridge回归问题-LLSVM" class="headerlink" title="基于核函数的Ridge回归问题(LLSVM)"></a>基于核函数的Ridge回归问题(LLSVM)</h3><p>根据上面的内容可知，根据表示规则，Ridge回归问题可以转变为等价的含核函数问题：将$w^\star=\sum_{n=1}^N\beta_nz_n$代入原目标函数即可：<br><img src="MLT2/pic9.png" alt=""><br>从而问题转变为求最优的$\beta$使得新的目标函数最小，对上式进行求导可得：<br>$$<br>\nabla E=\frac{2}{N}(\lambda K^TI\beta+K^TK\beta-K^TY)=\frac{2}{N}K^T((\lambda I+K)\beta-Y)\<br>\nabla E=0\to\beta=(\lambda I+K)^{-1}Y<br>$$</p>
+<p>从上式也不难发现，大部分$\beta$为非0，因此也为非稀疏的。</p>
+<h3 id="Tube-Regression"><a href="#Tube-Regression" class="headerlink" title="Tube Regression"></a>Tube Regression</h3><p>类似于“柔性”SVM，tube回归在原有线性回归模型中增加一定的“容忍度”，在距离小于一定范围内，认为没有误差，而大于该范围，则产生误差（从而使得$\beta$为稀疏的）。定义损失标准函数如下：<br>$$<br>err(y,s)=max(0,|s-y|-\epsilon)<br>$$<br>上述中容忍度为$\epsilon$。</p>
+<p>从而带有$L_2$正则项的tube回归问题的目标函数为，以及为了更加与SVM形式对应，将$\lambda$替换为$C$：<br><img src="MLT2/pic10.png" alt=""></p>
+<h3 id="Tube-Regression-to-SVR"><a href="#Tube-Regression-to-SVR" class="headerlink" title="Tube Regression$\to$SVR"></a>Tube Regression$\to$SVR</h3><p>类比于柔性SVM其含约束情况，可以将上述tube回归问题转化为含约束的情况：<br><img src="MLT2/pic11.png" alt=""><br>此时，后续的对偶化求解方式与SVM完全一样，可以自行推导，可以获得其等价的对偶形式，其中$\alpha^{\land}_n$是指$y_n-w^Tz_n-b\le\epsilon+\xi_n^{\land}$条件转化的拉格朗日乘子。$\alpha^{\lor}_n$是指$y_n-w^Tz_n-b\ge\epsilon+\xi_n^{\lor}$条件转化的拉格朗日乘子：<br><img src="MLT2/pic12.png" alt=""><br>此外，上述的$\beta$是稀疏的，且稀疏项对应关系如下所示：<br><img src="MLT2/pic13.png" alt=""></p>
+<h3 id="线性函数-核函数大集结"><a href="#线性函数-核函数大集结" class="headerlink" title="线性函数/核函数大集结"></a>线性函数/核函数大集结</h3><p>目前所有用到的线性模型以及其对应采用的核函数模型如下所示：<br><img src="MLT2/pic14.png" alt=""><br>需要说明几点：<br>① 第四行在LIBSVM中非常受欢迎<br>② 第三行很少使用，因为其对应的$\beta$为非稀疏的<br>③ 第二行在LIBLINEAR中非常受欢迎<br>④ 第一行很少很少使用，因为一般表现比较差</p>
+<h2 id="模型融合和Bagging方法"><a href="#模型融合和Bagging方法" class="headerlink" title="模型融合和Bagging方法"></a>模型融合和Bagging方法</h2><h3 id="模型融合"><a href="#模型融合" class="headerlink" title="模型融合"></a>模型融合</h3><p>模型融合的几种常见类型：<br><img src="MLT2/pic15.png" alt=""><br>模型融合的意义：<br><img src="MLT2/pic16.png" alt=""><br>从上述两种融合情况来看：融合或许能起到① feature transform的作用  ② regularization的作用</p>
+<h3 id="基于均匀混合回归模型解释融合背后的思想"><a href="#基于均匀混合回归模型解释融合背后的思想" class="headerlink" title="基于均匀混合回归模型解释融合背后的思想"></a>基于均匀混合回归模型解释融合背后的思想</h3><p>下述情况中需说明：① avg是指针对多个假设函数的平均  ② $E..or..\mathcal{E}$是指在不同数据集上的数学期望<br><img src="MLT2/pic17.png" alt=""><br>从上述结果不难看出：一系列假设函数$g_t$的误差平均要大于一系列假设函数平均的误差。</p>
+<p>下面根据上述情况的一种特例来进一步说明混合模型的优势：<br><img src="MLT2/pic18.png" alt=""><br>从上述特例可以很显著的看到均匀混合模型能够减少variance，从而提高模型的稳定性</p>
+<h3 id="混合模型-iff-线性模型-特征转换"><a href="#混合模型-iff-线性模型-特征转换" class="headerlink" title="混合模型$\iff$线性模型+特征转换"></a>混合模型$\iff$线性模型+特征转换</h3><p>常见混合模型的目标函数：<br><img src="MLT2/pic19.png" alt=""><br>从上式不难发现：<strong>线性混合模型=线性模型+特征转换(将假设函数视为特征转换)+约束条件</strong></p>
+<p>比如线性融合的线性回归模型等价于线性回归+特征转换<br><img src="MLT2/pic20.png" alt=""><br>所以对于任意的混合模型可以写成其对应的特征转换模型：<br><img src="MLT2/pic21.png" alt=""><br>其中$\Phi(x)=(g(x_1),g(x_2),…,g_T(x))$</p>
+<h3 id="Bagging-Bootstrap-Aggregation"><a href="#Bagging-Bootstrap-Aggregation" class="headerlink" title="Bagging(Bootstrap Aggregation)"></a>Bagging(Bootstrap Aggregation)</h3><p>Bagging的定义：<br><img src="MLT2/pic23.png" alt=""><br>从理想的模型$\Longrightarrow$Bagging模型<br><img src="MLT2/pic22.png" alt=""></p>
+<h2 id="Adaptive-Boosting-AdaBoost-算法"><a href="#Adaptive-Boosting-AdaBoost-算法" class="headerlink" title="Adaptive Boosting(AdaBoost)算法"></a>Adaptive Boosting(AdaBoost)算法</h2><h3 id="调整权值来体现多样性"><a href="#调整权值来体现多样性" class="headerlink" title="调整权值来体现多样性"></a>调整权值来体现多样性</h3><p>通过加入权值，可以起到类似于Bagging的作用：<br><img src="MLT2/pic24.png" alt=""><br>通过加入权值，可以间接增加假设函数集的多样性((获得不同的最优假设函数)：<br><img src="MLT2/pic25.png" alt=""></p>
+<h3 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h3><p><img src="MLT2/pic26.png" alt=""><br>几点核心思想：1. “放大”上次分类错误的样本，“隐藏”上次分类正确的样本 2. 根据每种最佳函数的错误率来对每种权值情况下的最佳函数分配不同的权重 </p>
+<p>上述算法的一些可供改变之处：为了避免出现$u^{(t)}\to0$的情况出现，可以在②的最后加上$u/sum(u)$将其始终保持和为1这个情况。</p>
+<h3 id="AdaBoost背后的理论依据"><a href="#AdaBoost背后的理论依据" class="headerlink" title="AdaBoost背后的理论依据"></a>AdaBoost背后的理论依据</h3><p>可以根据VC bound理论给出下列结果：<br><img src="MLT2/pic27.png" alt=""><br>上述结果可以说明AdaBoost的可行性。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/17/MLF&MLT/MLT2-2/" rel="next" title="机器学习技法作业2：part2">
+                <i class="fa fa-chevron-left"></i> 机器学习技法作业2：part2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/21/MLF&MLT/MLT3-1/" rel="prev" title="机器学习技法作业3：part1">
+                机器学习技法作业3：part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于核函数的Logistic回归"><span class="nav-number">1.</span> <span class="nav-text">基于核函数的Logistic回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#柔性SVM与含正则项模型"><span class="nav-number">1.1.</span> <span class="nav-text">柔性SVM与含正则项模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#柔性SVM-vs-Logistic回归"><span class="nav-number">1.2.</span> <span class="nav-text">柔性SVM vs Logistic回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM用于柔性二元分类"><span class="nav-number">1.3.</span> <span class="nav-text">SVM用于柔性二元分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示理论（什么情况适用核函数）"><span class="nav-number">1.4.</span> <span class="nav-text">表示理论（什么情况适用核函数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于核函数的logistic回归"><span class="nav-number">1.5.</span> <span class="nav-text">基于核函数的logistic回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVR-Support-Vector-Regression"><span class="nav-number">2.</span> <span class="nav-text">SVR(Support Vector Regression)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于核函数的Ridge回归问题-LLSVM"><span class="nav-number">2.1.</span> <span class="nav-text">基于核函数的Ridge回归问题(LLSVM)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tube-Regression"><span class="nav-number">2.2.</span> <span class="nav-text">Tube Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tube-Regression-to-SVR"><span class="nav-number">2.3.</span> <span class="nav-text">Tube Regression$\to$SVR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性函数-核函数大集结"><span class="nav-number">2.4.</span> <span class="nav-text">线性函数/核函数大集结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型融合和Bagging方法"><span class="nav-number">3.</span> <span class="nav-text">模型融合和Bagging方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型融合"><span class="nav-number">3.1.</span> <span class="nav-text">模型融合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于均匀混合回归模型解释融合背后的思想"><span class="nav-number">3.2.</span> <span class="nav-text">基于均匀混合回归模型解释融合背后的思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合模型-iff-线性模型-特征转换"><span class="nav-number">3.3.</span> <span class="nav-text">混合模型$\iff$线性模型+特征转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bagging-Bootstrap-Aggregation"><span class="nav-number">3.4.</span> <span class="nav-text">Bagging(Bootstrap Aggregation)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaptive-Boosting-AdaBoost-算法"><span class="nav-number">4.</span> <span class="nav-text">Adaptive Boosting(AdaBoost)算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调整权值来体现多样性"><span class="nav-number">4.1.</span> <span class="nav-text">调整权值来体现多样性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaBoost算法"><span class="nav-number">4.2.</span> <span class="nav-text">AdaBoost算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaBoost背后的理论依据"><span class="nav-number">4.3.</span> <span class="nav-text">AdaBoost背后的理论依据</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

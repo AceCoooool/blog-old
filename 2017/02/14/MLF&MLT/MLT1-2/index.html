@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习技法课后作业1-2：对应题目15～题目20">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习技法作业1：part2">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/14/MLF&MLT/MLT1-2/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习技法课后作业1-2：对应题目15～题目20">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-01-28T20:13:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习技法作业1：part2">
+<meta name="twitter:description" content="机器学习技法课后作业1-2：对应题目15～题目20">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/14/MLF&MLT/MLT1-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习技法作业1：part2 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/14/MLF&MLT/MLT1-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习技法作业1：part2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-14 15:15:09" itemprop="dateCreated datePublished" datetime="2017-02-14T15:15:09+08:00">2017-02-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:13:00" itemprop="dateModified" datetime="2018-01-29T04:13:00+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习技法课后作业1-2：对应题目15～题目20<br><a id="more"></a></p>
+<h2 id="机器学习技法作业1"><a href="#机器学习技法作业1" class="headerlink" title="机器学习技法作业1"></a>机器学习技法作业1</h2><p>Q15~Q20主要考虑在一个实际数据集上进行实验。该数据集为邮票数字，输入为数字对应图像的密度和对称度，输出为对应的数字。我们主要考虑多分类问题中一对多的情况。<br>注意事项：在计算$E_{in},E_{out},E_{val}$时，采用$0/1$判据，此外别对数据进行处理（如缩放等）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q15~Q20</span></span><br><span class="line"><span class="comment"># 加载数据函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadData</span><span class="params">(filename)</span>:</span></span><br><span class="line">    data = pd.read_csv(filename, sep=<span class="string">'\s+'</span>, header=<span class="keyword">None</span>)</span><br><span class="line">    data = data.as_matrix()</span><br><span class="line">    col, row = data.shape</span><br><span class="line">    X = np.c_[np.ones((col, <span class="number">1</span>)), data[:, <span class="number">1</span>: row]]</span><br><span class="line">    Y = data[:, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> X, Y</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 误差计算函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mistake</span><span class="params">(yhat, y)</span>:</span></span><br><span class="line">    err = np.sum(yhat != y)/len(y)</span><br><span class="line">    <span class="keyword">return</span> err</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">X, Y = loadData(<span class="string">'features_train.dat'</span>)</span><br><span class="line">Xtest, Ytest = loadData(<span class="string">'features_test.dat'</span>)</span><br><span class="line">row, col = X.shape</span><br></pre></td></tr></table></figure>
+<h3 id="问题15"><a href="#问题15" class="headerlink" title="问题15"></a>问题15</h3><p>Q15：采用线性kernel: $K(x_n,x_m)=x_n^Tx_m$，取$C=0.01$，解决$(0..VS..非0)$的二元分类问题，则其解得的$||w||$的值最接近多少？</p>
+<p>A15：以下结果可见，应该选择$0.6$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q15</span></span><br><span class="line">Ytemp = Y.copy()</span><br><span class="line">pos1 = Ytemp == <span class="number">0</span>; pos2 = Ytemp != <span class="number">0</span></span><br><span class="line">Ytemp[pos1] = <span class="number">1</span>; Ytemp[pos2] = <span class="number">-1</span></span><br><span class="line">clf = SVC(C=<span class="number">0.01</span>, kernel=<span class="string">'linear'</span>, shrinking=<span class="keyword">False</span>)</span><br><span class="line">clf.fit(X, Ytemp)</span><br><span class="line">print(<span class="string">'w: '</span>, clf.coef_, <span class="string">'\n |w|: '</span>, np.linalg.norm(clf.coef_))</span><br></pre></td></tr></table></figure>
+<pre><code>w:  [[ -1.82145965e-15   5.70727340e-01   2.59535779e-02]] 
+ |w|:  0.571317149084
+</code></pre><h3 id="问题16"><a href="#问题16" class="headerlink" title="问题16"></a>问题16</h3><p>Q16：考虑采用多项式kernel: $K(x_n,x_m)=(1+x_n^Tx_m)^Q$，考虑参数$C=0.01，Q=2$的情况下，各种一对多情况的$E_{in}$</p>
+<p>A16：从而可见应该选择$8..vs..not.8$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q16~Q17</span></span><br><span class="line">Ein = np.zeros((<span class="number">10</span>,))</span><br><span class="line">Salpha = np.zeros((<span class="number">10</span>,))</span><br><span class="line">clf = SVC(C=<span class="number">0.01</span>, kernel=<span class="string">'poly'</span>, degree=<span class="number">2</span>, gamma=<span class="number">1</span>, coef0=<span class="number">1</span>, shrinking=<span class="keyword">False</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    Ytemp = Y.copy()</span><br><span class="line">    pos1 = Ytemp == i; pos2 = Ytemp != i</span><br><span class="line">    Ytemp[pos1] = <span class="number">1</span>; Ytemp[pos2] = <span class="number">-1</span></span><br><span class="line">    clf.fit(X, Ytemp)</span><br><span class="line">    Yhat = clf.predict(X)</span><br><span class="line">    Ein[i] = mistake(Ytemp, Yhat)</span><br><span class="line">    Salpha[i] = np.sum(np.abs(clf.dual_coef_))</span><br><span class="line">out = np.c_[Ein,Salpha]</span><br><span class="line">print(<span class="string">'\tEin\t\t Sum_alpha'</span>)</span><br><span class="line">print(out)</span><br></pre></td></tr></table></figure>
+<pre><code>       Ein                 Sum_alpha
+[[  1.02455082e-01   2.14119479e+01]
+ [  1.44013167e-02   3.74000000e+00]
+ [  1.00260595e-01   1.46200000e+01]
+ [  9.02482513e-02   1.31600000e+01]
+ [  8.94253189e-02   1.30400000e+01]
+ [  7.62584008e-02   1.11200000e+01]
+ [  9.10711837e-02   1.32800000e+01]
+ [  8.84652311e-02   1.29000000e+01]
+ [  7.43382252e-02   1.08400000e+01]
+ [  8.83280757e-02   1.28800000e+01]]
+</code></pre><h3 id="问题17"><a href="#问题17" class="headerlink" title="问题17"></a>问题17</h3><p>Q17：与Q16相同的情况下，求各自对应的$\sum\alpha_n$</p>
+<p>A17：从上述程序可见，应该选择$20.0$</p>
+<h3 id="问题18"><a href="#问题18" class="headerlink" title="问题18"></a>问题18</h3><p>Q18：考虑高斯kernel: $K(x_n,x_m)=exp(-\gamma||x_n-x_m||^2)$。当$\gamma=100$，考虑$0..vs..not.0$问题，分别取$C=[0.001,0.01,0.1,1,10]$这五种情况时，以下对应的几种属性中哪个是随着$C$增大严格递减的？<br>(a). $\mathcal{Z}$空间中，自由支持向量到超平面的距离<br>(b). 支持向量的数量<br>(c). $E_{out}$<br>(d). $\sum_{n=1}^N\sum_{m=1}^NK(x_n,x_m)$</p>
+<p>A18：显然(d)项是一个定值，不变。(a)项将$C$视为惩罚因子，$C$越大，容忍能力越差，从而会导致margin会更小，因此(a)项正确。其他两项看下面结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q18</span></span><br><span class="line">c = np.array([<span class="number">0.001</span>, <span class="number">0.01</span>, <span class="number">0.1</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line">nsup = np.zeros((len(c),))</span><br><span class="line">eout = np.zeros((len(c),))</span><br><span class="line">Ytemp = Y.copy()</span><br><span class="line">pos1 = Ytemp == <span class="number">0</span>; pos2 = Ytemp != <span class="number">0</span></span><br><span class="line">Ytemp[pos1] = <span class="number">1</span>; Ytemp[pos2] = <span class="number">-1</span></span><br><span class="line">Ytesttemp = Ytest.copy()</span><br><span class="line">pos1 = Ytesttemp == <span class="number">0</span>; pos2 = Ytesttemp != <span class="number">0</span></span><br><span class="line">Ytesttemp[pos1] = <span class="number">1</span>; Ytesttemp[pos2] = <span class="number">-1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(c)):</span><br><span class="line">    clf = SVC(C=c[i], kernel=<span class="string">'rbf'</span>, gamma=<span class="number">100</span>, shrinking=<span class="keyword">False</span>)</span><br><span class="line">    clf.fit(X, Ytemp)</span><br><span class="line">    nsup[i] = np.sum(clf.n_support_)</span><br><span class="line">    yhat = clf.predict(Xtest)</span><br><span class="line">    eout[i] = mistake(Ytesttemp, yhat)</span><br><span class="line">out = np.c_[np.c_[c,nsup],eout]</span><br><span class="line">print(<span class="string">'\tC\t\t n_suport\t eout'</span>)</span><br><span class="line">print(out)</span><br></pre></td></tr></table></figure>
+<pre><code>       C                 n_suport           eout
+[[  1.00000000e-03   2.39800000e+03   1.78873941e-01]
+ [  1.00000000e-02   2.52000000e+03   1.78873941e-01]
+ [  1.00000000e-01   2.28500000e+03   1.05132038e-01]
+ [  1.00000000e+00   1.77400000e+03   1.03637270e-01]
+ [  1.00000000e+01   1.67300000e+03   1.04633782e-01]]
+</code></pre><h3 id="问题19"><a href="#问题19" class="headerlink" title="问题19"></a>问题19</h3><p>Q19：内容同Q18，当$C=0.1$时，$\gamma=[1,10,100,1000,10000]$中哪个对应最下的$E_{out}$</p>
+<p>A19：从下述结果可见，选择$\gamma=10$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q19</span></span><br><span class="line">gamma1 = np.array([<span class="number">1</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">1000</span>, <span class="number">10000</span>])</span><br><span class="line">eout = np.zeros((len(gamma1),))</span><br><span class="line">Ytemp = Y.copy()</span><br><span class="line">pos1 = Ytemp == <span class="number">0</span>; pos2 = Ytemp != <span class="number">0</span></span><br><span class="line">Ytemp[pos1] = <span class="number">1</span>; Ytemp[pos2] = <span class="number">-1</span></span><br><span class="line">Ytesttemp = Ytest.copy()</span><br><span class="line">pos1 = Ytesttemp == <span class="number">0</span>; pos2 = Ytesttemp != <span class="number">0</span></span><br><span class="line">Ytesttemp[pos1] = <span class="number">1</span>; Ytesttemp[pos2] = <span class="number">-1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(gamma1)):</span><br><span class="line">    clf = SVC(C=<span class="number">0.1</span>, kernel=<span class="string">'rbf'</span>, gamma=gamma1[i], shrinking=<span class="keyword">False</span>)</span><br><span class="line">    clf.fit(X, Ytemp)</span><br><span class="line">    yhat = clf.predict(Xtest)</span><br><span class="line">    eout[i] = mistake(yhat, Ytesttemp)</span><br><span class="line">out = np.c_[gamma1, eout]</span><br><span class="line">print(<span class="string">'\t gamma \t\t eout'</span>)</span><br><span class="line">print(out)</span><br></pre></td></tr></table></figure>
+<pre><code>       gamma              eout
+[[  1.00000000e+00   1.07125062e-01]
+ [  1.00000000e+01   9.91529646e-02]
+ [  1.00000000e+02   1.05132038e-01]
+ [  1.00000000e+03   1.78873941e-01]
+ [  1.00000000e+04   1.78873941e-01]]
+</code></pre><h3 id="问题20"><a href="#问题20" class="headerlink" title="问题20"></a>问题20</h3><p>Q20：内容同Q18，将数据集中随机选取1000个作为验证集，则对于$C=0.1$的情况下，不同的$\gamma=[1,10,100,1000,10000]$中，哪个对应的$E_{val}$最小（进行100次实验取平均）</p>
+<p>A20：从下述结果可见，$\gamma=10$时对应最小</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Q20</span></span><br><span class="line">evali = np.zeros((len(gamma1),))</span><br><span class="line">Ytemp = Y.copy()</span><br><span class="line">pos1 = Ytemp == <span class="number">0</span>; pos2 = Ytemp != <span class="number">0</span></span><br><span class="line">Ytemp[pos1] = <span class="number">1</span>; Ytemp[pos2] = <span class="number">-1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(gamma1)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        pos = np.random.permutation(row)</span><br><span class="line">        Xval = X[pos[<span class="number">0</span>:<span class="number">1000</span>], :]; Yval = Ytemp[pos[<span class="number">0</span>:<span class="number">1000</span>]]</span><br><span class="line">        Xtrain = X[pos[<span class="number">1000</span>:], :]; Ytrain = Ytemp[pos[<span class="number">1000</span>:]]</span><br><span class="line">        clf = SVC(C=<span class="number">0.1</span>, kernel=<span class="string">'rbf'</span>, gamma=gamma1[i], shrinking=<span class="keyword">False</span>)</span><br><span class="line">        clf.fit(Xtrain, Ytrain)</span><br><span class="line">        yhat = clf.predict(Xval)</span><br><span class="line">        evali[i] += mistake(yhat, Yval)</span><br><span class="line">out = np.c_[gamma1, evali/<span class="number">100</span>]</span><br><span class="line">print(<span class="string">'\t gamma\t\t eval'</span>)</span><br><span class="line">print(out)</span><br></pre></td></tr></table></figure>
+<pre><code>       gamma              eval
+[[  1.00000000e+00   1.05900000e-01]
+ [  1.00000000e+01   9.94500000e-02]
+ [  1.00000000e+02   1.00830000e-01]
+ [  1.00000000e+03   1.64670000e-01]
+ [  1.00000000e+04   1.62690000e-01]]
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/13/MLF&MLT/MLT1-1/" rel="next" title="机器学习技法作业1：part1">
+                <i class="fa fa-chevron-left"></i> 机器学习技法作业1：part1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/14/MLF&MLT/MLT1/" rel="prev" title="机器学习技法Lec1-Lec4">
+                机器学习技法Lec1-Lec4 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习技法作业1"><span class="nav-number">1.</span> <span class="nav-text">机器学习技法作业1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题15"><span class="nav-number">1.1.</span> <span class="nav-text">问题15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题16"><span class="nav-number">1.2.</span> <span class="nav-text">问题16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题17"><span class="nav-number">1.3.</span> <span class="nav-text">问题17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题18"><span class="nav-number">1.4.</span> <span class="nav-text">问题18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题19"><span class="nav-number">1.5.</span> <span class="nav-text">问题19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题20"><span class="nav-number">1.6.</span> <span class="nav-text">问题20</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

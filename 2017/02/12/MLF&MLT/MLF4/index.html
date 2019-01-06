@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习基石Lec13-Lec16主要知识点：对应作业4">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石Lec13-Lec16">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习基石Lec13-Lec16主要知识点：对应作业4">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic1.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic2.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic3.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic4.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic5.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic6.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic7.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic8.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic9.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic10.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic11.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic12.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic13.png">
+<meta property="og:updated_time" content="2018-01-28T20:06:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习基石Lec13-Lec16">
+<meta name="twitter:description" content="机器学习基石Lec13-Lec16主要知识点：对应作业4">
+<meta name="twitter:image" content="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/MLF4/pic1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/12/MLF&MLT/MLF4/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习基石Lec13-Lec16 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/12/MLF&MLT/MLF4/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习基石Lec13-Lec16
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-12 17:46:39" itemprop="dateCreated datePublished" datetime="2017-02-12T17:46:39+08:00">2017-02-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:06:28" itemprop="dateModified" datetime="2018-01-29T04:06:28+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习基石Lec13-Lec16主要知识点：对应作业4<br><a id="more"></a></p>
+<h2 id="过拟合的危害"><a href="#过拟合的危害" class="headerlink" title="过拟合的危害"></a>过拟合的危害</h2><h3 id="过拟合和欠拟合"><a href="#过拟合和欠拟合" class="headerlink" title="过拟合和欠拟合"></a>过拟合和欠拟合</h3><ul>
+<li>过拟合定义：$E_{in}$足够小，但是$E_{in}$和$E_{out}$相差甚远（常常发生在$d_{VC}\gt d_{VC}^\star$）</li>
+<li>欠拟合定义：$E_{in}$和$E_{out}$均过大（常常发生在$d_{VC}\lt d_{VC}^\star$</li>
+</ul>
+<h3 id="导致过拟合的几大主要原因"><a href="#导致过拟合的几大主要原因" class="headerlink" title="导致过拟合的几大主要原因"></a>导致过拟合的几大主要原因</h3><p><img src="MLF4/pic1.png" alt=""></p>
+<h3 id="Stochastic-noise和deterministic-noise"><a href="#Stochastic-noise和deterministic-noise" class="headerlink" title="Stochastic noise和deterministic noise"></a>Stochastic noise和deterministic noise</h3><ul>
+<li>Stochastic noise：属于“不可控”因素，来自于外界对数据的污染</li>
+<li>Deterministic noise：可以视为假设函数集中最佳函数$h^\star$与潜在目标函数$f$的差异。与假设函数集有关，因此属于“可控”因素</li>
+</ul>
+<p>以下是针对$y=f(x)+\epsilon\sim Gaussin(\sum_{q=0}^{Q_f}\alpha_qx^q,\sigma^2)$为目标函数情况下的实验（其中坐标轴上每个点的数值表示$E_{out}(g_{10})-E_{out}(g_2)$的结果）</p>
+<p><img src="MLF4/pic2.png" alt=""></p>
+<p>从上述图像可知：并不是假设函数集越复杂越好，需要视实际拥有的数据量$N$等情况而定。</p>
+<h3 id="解决过拟合的几个方法"><a href="#解决过拟合的几个方法" class="headerlink" title="解决过拟合的几个方法"></a>解决过拟合的几个方法</h3><ul>
+<li>数据修正：对错误的标签进行修正</li>
+<li>数据筛选：剔除一些错误或“不良”数据</li>
+<li>添加“伪数据”：通过旋转平移等手段来增加数据量</li>
+<li>正则化</li>
+<li>…….</li>
+</ul>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>通过对参数$w$加入一些约束，从而起到减少假设函数集中假设函数的数量，从而有效减少了假设函数的复杂度。</p>
+<p>常见正则化的两种等价形式：<br><img src="MLF4/pic3.png" alt=""></p>
+<h3 id="正则化背后的VC理论"><a href="#正则化背后的VC理论" class="headerlink" title="正则化背后的VC理论"></a>正则化背后的VC理论</h3><p>解释①：直接的减少了模型的复杂度$\Omega(\mathcal{H}(C))\lt \Omega(\mathcal{H})$<br><img src="MLF4/pic4.png" alt=""><br>解释②：间接地减少了模型的复杂度：<br><img src="MLF4/pic5.png" alt=""><br>将$\frac{\lambda}{N}w^Tw$视为“关于$w$的复杂度度量”$\frac{\lambda}{N}\Omega(w)$，从而上述两边结合等价于：<br>$$<br>E_{out}(w)\leq E_{aug}(w)-\frac{\lambda}{N}\Omega(w)+\Omega(\mathcal{H})<br>$$<br>从而相比$E_{in}$，$E_{aug}$更加近似$E_{out}$</p>
+<h3 id="常见的正则项-Omega-w"><a href="#常见的正则项-Omega-w" class="headerlink" title="常见的正则项$\Omega(w)$"></a>常见的正则项$\Omega(w)$</h3><p><img src="MLF4/pic6.png" alt=""></p>
+<p>关于$\lambda$的选择：$\lambda$可以调整正则项能力的强弱，$\lambda$越大，正则项作用越大。当噪声(无论deterministic noise或者stochastic noise)越大时，相对而言，$\lambda$可以调整的大一点</p>
+<h2 id="验证方式"><a href="#验证方式" class="headerlink" title="验证方式"></a>验证方式</h2><h3 id="利用验证集选择模型"><a href="#利用验证集选择模型" class="headerlink" title="利用验证集选择模型"></a>利用验证集选择模型</h3><p><strong>基本框架</strong>（$K$代表验证集含有的数据量）：<br><img src="MLF4/pic7.png" alt=""><br>不等式①可以根据复杂度$\Omega(N,\mathcal{H},\delta)$与$N$有关，$N$越大，值越小可得。<br>不等式②则将$E_{val}$看成$E_{in}$，则就是VC bound</p>
+<p><strong>存在的矛盾</strong><br><img src="MLF4/pic8.png" alt=""><br>当$K$过大时：$g^-$远差于$g$，因此不能够代表选择的$\mathcal{H}$是“最佳的”<br>当$K$过小时：$E_{val}(g^-)$与$E_{out}(g^-)$，则通过$E_{val}$的大小选出来的最佳$\mathcal{H}$，对测试集而言并非“最佳的”</p>
+<p>实践中，常取$K=N/5$</p>
+<h3 id="常见的交叉验证的方式"><a href="#常见的交叉验证的方式" class="headerlink" title="常见的交叉验证的方式"></a>常见的交叉验证的方式</h3><p><strong>留一交叉验证</strong></p>
+<p><img src="MLF4/pic9.png" alt=""></p>
+<p>优点：理论上$E_{loocv}$的数学期望可以代表$E_{out}(g^-)$的数学期望，证明见作业<br>缺点：计算开销大；不稳定</p>
+<p><strong>留一份交叉验证</strong></p>
+<p><img src="MLF4/pic10.png" alt=""></p>
+<p>将数据划分为$V$份（实践中往往$V=5\ or\ 10$）</p>
+<h2 id="三个学习准则"><a href="#三个学习准则" class="headerlink" title="三个学习准则"></a>三个学习准则</h2><h3 id="Occam’s-Razor-for-Learning"><a href="#Occam’s-Razor-for-Learning" class="headerlink" title="Occam’s Razor for Learning"></a>Occam’s Razor for Learning</h3><p><img src="MLF4/pic11.png" alt=""></p>
+<h3 id="Sampling-Bias"><a href="#Sampling-Bias" class="headerlink" title="Sampling Bias"></a>Sampling Bias</h3><p><img src="MLF4/pic12.png" alt=""></p>
+<h3 id="Data-Snooping"><a href="#Data-Snooping" class="headerlink" title="Data Snooping"></a>Data Snooping</h3><p><img src="MLF4/pic13.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/12/MLF&MLT/MLF3/" rel="next" title="机器学习基石Lec9-Lec12">
+                <i class="fa fa-chevron-left"></i> 机器学习基石Lec9-Lec12
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/13/MLF&MLT/MLT1-1/" rel="prev" title="机器学习技法作业1：part1">
+                机器学习技法作业1：part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#过拟合的危害"><span class="nav-number">1.</span> <span class="nav-text">过拟合的危害</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过拟合和欠拟合"><span class="nav-number">1.1.</span> <span class="nav-text">过拟合和欠拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导致过拟合的几大主要原因"><span class="nav-number">1.2.</span> <span class="nav-text">导致过拟合的几大主要原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stochastic-noise和deterministic-noise"><span class="nav-number">1.3.</span> <span class="nav-text">Stochastic noise和deterministic noise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决过拟合的几个方法"><span class="nav-number">1.4.</span> <span class="nav-text">解决过拟合的几个方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则化"><span class="nav-number">2.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本思想"><span class="nav-number">2.1.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化背后的VC理论"><span class="nav-number">2.2.</span> <span class="nav-text">正则化背后的VC理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的正则项-Omega-w"><span class="nav-number">2.3.</span> <span class="nav-text">常见的正则项$\Omega(w)$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证方式"><span class="nav-number">3.</span> <span class="nav-text">验证方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用验证集选择模型"><span class="nav-number">3.1.</span> <span class="nav-text">利用验证集选择模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的交叉验证的方式"><span class="nav-number">3.2.</span> <span class="nav-text">常见的交叉验证的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个学习准则"><span class="nav-number">4.</span> <span class="nav-text">三个学习准则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Occam’s-Razor-for-Learning"><span class="nav-number">4.1.</span> <span class="nav-text">Occam’s Razor for Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sampling-Bias"><span class="nav-number">4.2.</span> <span class="nav-text">Sampling Bias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Snooping"><span class="nav-number">4.3.</span> <span class="nav-text">Data Snooping</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

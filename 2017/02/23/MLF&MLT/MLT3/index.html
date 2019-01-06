@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习技法Lec9-Lec12主要知识点：对应作业3">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习技法Lec9-Lec12">
+<meta property="og:url" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/index.html">
+<meta property="og:site_name" content="Ace&#39;s Blog">
+<meta property="og:description" content="机器学习技法Lec9-Lec12主要知识点：对应作业3">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic1.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic2.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic3.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic4.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic5.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic6.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic7.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic8.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic9.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic10.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic11.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic12.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic13.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic14.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic15.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic16.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic17.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic18.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic19.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic20.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic21.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic22.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic23.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic24.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic25.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic26.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic27.png">
+<meta property="og:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic28.png">
+<meta property="og:updated_time" content="2018-01-28T20:13:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习技法Lec9-Lec12">
+<meta name="twitter:description" content="机器学习技法Lec9-Lec12主要知识点：对应作业3">
+<meta name="twitter:image" content="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/MLT3/pic1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://acecoooool.github.io/blog/2017/02/23/MLF&MLT/MLT3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习技法Lec9-Lec12 | Ace's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ace's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">never try, never know.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://acecoooool.github.io/blog/blog/2017/02/23/MLF&MLT/MLT3/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ace">
+      <meta itemprop="description" content="machine learning, computer vision.">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ace's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习技法Lec9-Lec12
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-02-23 21:06:27" itemprop="dateCreated datePublished" datetime="2017-02-23T21:06:27+08:00">2017-02-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-01-29 04:13:46" itemprop="dateModified" datetime="2018-01-29T04:13:46+08:00">2018-01-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/blog/categories/MLF-MLT/" itemprop="url" rel="index"><span itemprop="name">MLF&MLT</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习技法Lec9-Lec12主要知识点：对应作业3<br><a id="more"></a></p>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h3 id="三种不同类型的集成模型"><a href="#三种不同类型的集成模型" class="headerlink" title="三种不同类型的集成模型"></a>三种不同类型的集成模型</h3><p>常见的三种基本集成模型如下表所示（其中①blending代表融合的方式—可以理解为在获得$g_t$后采用的融合策略 ②learning代表具体的学习算法—可以理解为在学习的过程中就将融合的策略加入$g_t$）<br><img src="MLT3/pic1.png" alt=""><br>后续大部分集成算法都是基于这些集成算法进一步“融合或改进”</p>
+<h3 id="决策树模型基本框架"><a href="#决策树模型基本框架" class="headerlink" title="决策树模型基本框架"></a>决策树模型基本框架</h3><p><img src="MLT3/pic2.png" alt=""></p>
+<h3 id="CART算法（决策树模型的一种）"><a href="#CART算法（决策树模型的一种）" class="headerlink" title="CART算法（决策树模型的一种）"></a>CART算法（决策树模型的一种）</h3><p>“纯度函数”(impurity()函数)的选择：推荐回归问题中采用regression error，分类问题中选用Gini index<br><img src="MLT3/pic3.png" alt=""><br>终止条件的选择：<br><img src="MLT3/pic4.png" alt=""><br>CART算法的实现：<br><img src="MLT3/pic5.png" alt=""></p>
+<h3 id="CART存在的问题及改进"><a href="#CART存在的问题及改进" class="headerlink" title="CART存在的问题及改进"></a>CART存在的问题及改进</h3><p>① 过拟合问题：完全生长的树容易导致过拟合（$E_{in}=0$）<br>加入正则项，该正则项可以为限制<strong>叶子结点</strong>的数目，从而使树“生长”到一定程度就停止了</p>
+<p>② 特征缺失问题：比如需预测的数据中某个特征$x_i$缺失<br>在进行划分的过程中，如果遇到最优划分特征为“$x_i$”，则采用“次优或其他”的特征(且该数据包含的特征)来替代该特征的划分。但是这样付出的代价就是要“保留”其他特征“拿来替换”特征的划分标准等</p>
+<p>CART树的优点：<br><img src="MLT3/pic6.png" alt=""></p>
+<h2 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h2><h3 id="随机森林算法框架"><a href="#随机森林算法框架" class="headerlink" title="随机森林算法框架"></a>随机森林算法框架</h3><p>随机森林=bagging+fully-grown CART：结合了bagging降低variance的特点以及CART具有较大variance的特点。<br><img src="MLT3/pic7.png" alt=""><br>增加随机森林“多样性”的方法（增加了决策树的多样性）— 这也是随机森林“随机”的体现：<br>① 通过“bagging”使得每次数据集不一样，从而使得每次决策树基于的样本不同。增加了决策树的多样性<br>② 每次$b(x)$过程中选用$d^\prime$个特征，而不是$d$个特征（$d^\prime \ll d$），从而能够获得更多不同的决策树 </p>
+<h3 id="随机森林的小技巧"><a href="#随机森林的小技巧" class="headerlink" title="随机森林的小技巧"></a>随机森林的小技巧</h3><p>① 随机森林的自验证（OOBvalidation）<br>通过bagging每次会有一部分数据并未被取到，而该部分可以被用作验证集<br><img src="MLT3/pic8.png" alt=""><br>需要主要的是，其中$G_n^{-}(x_n)$代表全部在bagging中未取到$x_n$的决策树的平均，而不是全部决策树的平均</p>
+<p>② 特征选择技巧<br>可以采用的策略有</p>
+<ul>
+<li><p>移除冗余特征(如年龄和生日)和不相关特征</p>
+</li>
+<li><p>给不同特征赋予不同的重要性，在随机森林中可以通过下述策略来衡量特征重要性（替换后错误率改变多少来衡量）：<br><img src="MLT3/pic9.png" alt=""></p>
+</li>
+</ul>
+<p>③ 随机森林可能存在的问题<br>当全部的“随机过程”显得非常“随机”时，会带来不稳定性，从而可能需要非常多的决策树融合才能达到较好的效果</p>
+<h2 id="GBDT（Gradient-Boosted-Decision-Tree）"><a href="#GBDT（Gradient-Boosted-Decision-Tree）" class="headerlink" title="GBDT（Gradient Boosted Decision Tree）"></a>GBDT（Gradient Boosted Decision Tree）</h2><h3 id="AdaBoost-DTree"><a href="#AdaBoost-DTree" class="headerlink" title="AdaBoost-DTree"></a>AdaBoost-DTree</h3><p>类似随机森林的方法，运用到AdaBoost-DTree上，有下述结果：<br><img src="MLT3/pic10.png" alt=""><br>上述“直接延伸”存在的问题：<br>① 破坏了DTree，需要重新构造新的决策树算法<br>解决方法：将权值通过“bagging”来体现，即bagging取样时，并不是直接采用等概率随机方法，而是根据$samling\propto u^{(t)}$来取样，从而也能起到$E_{in}^{u}(h)=\frac{1}{N}\sum u_n\cdot err(y_n,h(x_n))$的效果<br>② 完全生长树存在误差为0的问题：<br><img src="MLT3/pic11.png" alt=""><br>解决方法：通过对树进行剪枝，比如限制树的高度，限制叶子结点的数目等等。</p>
+<h3 id="以优化的观点来看AdaBoost"><a href="#以优化的观点来看AdaBoost" class="headerlink" title="以优化的观点来看AdaBoost"></a>以优化的观点来看AdaBoost</h3><p>AdaBoost更新$u_n^{(t+1)}$时采用下述的策略：<br><img src="MLT3/pic12.png" alt=""></p>
+<p>令$s_n=\sum_{t=1}^T\alpha_tg_t(x_n)$，站在SVM的角度可见，当$y_ns_n$越大，代表离分离超平面越远，如果全部的数据均能使得其随着$T$增大，$y_ns_n$增大，则说明这个超平面“越来越好，鲁棒性更强”：<br><img src="MLT3/pic13.png" alt=""><br>因此，AdaBoost问题的每次更新可以理解为不断减少$\sum_{n=1}^N u_n^{(t)}$，因此可以视为下述优化问题：<br><img src="MLT3/pic14.png" alt=""><br>为了与常见的损失函数联系起来，建立下述对应关系：<br>$$<br>E(w_t)=\frac{1}{N}\sum_{n=1}^N exp(-y_nw_t)\quad w_t=\sum_{k=1}^{t-1}\alpha_kg_k(x_n)\<br>等价于err=exp(-ys)的损失函数<br>$$<br>从而通过“一阶泰勒展开”来推导梯度下降法：<br><img src="MLT3/pic15.png" alt=""><br>从而可以推导出下式（理清$w_t$具体表示的是什么），其中$v=h(x)$：<br><img src="MLT3/pic16.png" alt=""><br>上式推导可见，通过梯度下降法寻找的最优$h=v$等价于通过AdaBoost算法寻找$E_{in}^{u(t)}(h)$最佳的$h$。因此可见，AdaBoost算法背后的原理也就是通过梯度下降法寻找最优的$h$</p>
+<p>当求解得最佳的$g=h$，下一步就是求解$\eta$：<br><img src="MLT3/pic17.png" alt=""><br>求解结果也等价于AdaBoost中采用的$\alpha_t$。</p>
+<p>从而可见，AdaBoost可以视为GradientBoost的一种情况，且GradientBoost具有更好的“可拓展性”，可以更改误差衡量函数$err$便可获得不同的GradientBoost算法：<br><img src="MLT3/pic18.png" alt=""></p>
+<p>GradientBoost算法通常的解法：<br>① 先将$\eta$视为常量，求最佳的$h=g$<br>② 将最佳的$g$代入，求最佳的$\eta$</p>
+<h3 id="基于平方损失的GradientBoost"><a href="#基于平方损失的GradientBoost" class="headerlink" title="基于平方损失的GradientBoost"></a>基于平方损失的GradientBoost</h3><p>对应的GradientBoost基本形式：<br><img src="MLT3/pic19.png" alt=""></p>
+<p>步骤①： 寻找最佳$h$：<br><img src="MLT3/pic20.png" alt=""><br>步骤②： 寻找最佳$\eta$：<br><img src="MLT3/pic21.png" alt=""><br>步骤③： 结合全部的情况，并结合决策树，获得最终的GBDT算法<br><img src="MLT3/pic22.png" alt=""></p>
+<h3 id="集成模型大纲"><a href="#集成模型大纲" class="headerlink" title="集成模型大纲"></a>集成模型大纲</h3><p><img src="MLT3/pic23.png" alt=""><br>上述的模型均比较常用，视具体应用场景而定</p>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="神经网络基本框架"><a href="#神经网络基本框架" class="headerlink" title="神经网络基本框架"></a>神经网络基本框架</h3><p><img src="MLT3/pic24.png" alt=""><br>对应的损失函数：<br><img src="MLT3/pic25.png" alt=""></p>
+<h3 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h3><p><img src="MLT3/pic26.png" alt=""><br>对应的具体算法流程<br><img src="MLT3/pic27.png" alt=""></p>
+<h3 id="对应的VC维和正则化"><a href="#对应的VC维和正则化" class="headerlink" title="对应的VC维和正则化"></a>对应的VC维和正则化</h3><p>粗略估计对应的VC维：<br><img src="MLT3/pic28.png" alt=""><br>容易导致过拟合，可以采用的策略：<br>① 加入正则项，例如L2正则项：$\sum(w_{ij}^{(l)})^2$<br>② 提前停止，梯度下降到一定程度就停止</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/23/MLF&MLT/MLT3-2/" rel="next" title="机器学习技法作业3：part2">
+                <i class="fa fa-chevron-left"></i> 机器学习技法作业3：part2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/25/MLF&MLT/MLT4-1/" rel="prev" title="机器学习技法作业4：part1">
+                机器学习技法作业4：part1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ace</p>
+              <p class="site-description motion-element" itemprop="description">machine learning, computer vision.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AceCoooool" title="GitHub &rarr; https://github.com/AceCoooool" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:tinyshine@yeah.net" title="E-Mail &rarr; mailto:tinyshine@yeah.net" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三种不同类型的集成模型"><span class="nav-number">1.1.</span> <span class="nav-text">三种不同类型的集成模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树模型基本框架"><span class="nav-number">1.2.</span> <span class="nav-text">决策树模型基本框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CART算法（决策树模型的一种）"><span class="nav-number">1.3.</span> <span class="nav-text">CART算法（决策树模型的一种）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CART存在的问题及改进"><span class="nav-number">1.4.</span> <span class="nav-text">CART存在的问题及改进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机森林"><span class="nav-number">2.</span> <span class="nav-text">随机森林</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机森林算法框架"><span class="nav-number">2.1.</span> <span class="nav-text">随机森林算法框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机森林的小技巧"><span class="nav-number">2.2.</span> <span class="nav-text">随机森林的小技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GBDT（Gradient-Boosted-Decision-Tree）"><span class="nav-number">3.</span> <span class="nav-text">GBDT（Gradient Boosted Decision Tree）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaBoost-DTree"><span class="nav-number">3.1.</span> <span class="nav-text">AdaBoost-DTree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以优化的观点来看AdaBoost"><span class="nav-number">3.2.</span> <span class="nav-text">以优化的观点来看AdaBoost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于平方损失的GradientBoost"><span class="nav-number">3.3.</span> <span class="nav-text">基于平方损失的GradientBoost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成模型大纲"><span class="nav-number">3.4.</span> <span class="nav-text">集成模型大纲</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络"><span class="nav-number">4.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络基本框架"><span class="nav-number">4.1.</span> <span class="nav-text">神经网络基本框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播算法"><span class="nav-number">4.2.</span> <span class="nav-text">反向传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对应的VC维和正则化"><span class="nav-number">4.3.</span> <span class="nav-text">对应的VC维和正则化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ace</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/blog/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/blog/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/blog/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/blog/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/blog/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/blog/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
